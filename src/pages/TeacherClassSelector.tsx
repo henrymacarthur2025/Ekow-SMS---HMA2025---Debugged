@@ -82,7 +82,7 @@ export default function TeacherClassSelector({ navigate }: { navigate: (path: st
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -107,7 +107,7 @@ export default function TeacherClassSelector({ navigate }: { navigate: (path: st
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {classes.map((cls) => (
-                            <button 
+                            <button onClick={() => navigate('empty_state')} 
                                 key={cls.id}
                                 className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 hover:border-[#1F3864] hover:shadow-md transition-all group text-left flex flex-col h-full"
                             >

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMockData } from '../store/MockDataContext';
 import { 
     LayoutDashboard, Users, GraduationCap, Building2, CalendarCheck, 
     Bell, LogOut, Menu, MessageSquare, Settings, Contact, Shield,
@@ -24,7 +25,7 @@ export default function AdminGradeOversight({ navigate }: { navigate: (path: str
         { icon: BookOpen, label: 'Subjects', path: 'admin_subjects', active: false },
         { icon: Calculator, label: 'Grades', path: 'admin_grade_oversight', active: true },
         { icon: CalendarCheck, label: 'Attendance', path: 'admin_attendance_oversight', active: false },
-        { icon: MessageSquare, label: 'Announcements', path: '#', active: false },
+        { icon: MessageSquare, label: 'Announcements', path: 'admin_announcements', active: false },
         { icon: Settings, label: 'Settings', path: 'admin_academic_year', active: false },
         { icon: LogOut, label: 'Logout', path: 'login', active: false },
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
@@ -112,7 +113,7 @@ export default function AdminGradeOversight({ navigate }: { navigate: (path: str
                         >
                             <History className="w-5 h-5" />
                         </button>
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -275,7 +276,7 @@ export default function AdminGradeOversight({ navigate }: { navigate: (path: str
                                                 </td>
                                                 <td className="py-4 px-5 font-semibold text-gray-500">{student.notes || '-'}</td>
                                                 <td className="py-4 px-5 text-right">
-                                                    <button className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-bold text-[#1F3864] bg-[#DCE6F1]/50 hover:bg-[#DCE6F1] rounded-lg transition-colors">
+                                                    <button onClick={() => navigate('empty_state')} className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-bold text-[#1F3864] bg-[#DCE6F1]/50 hover:bg-[#DCE6F1] rounded-lg transition-colors">
                                                         <Edit2 className="w-4 h-4" />
                                                         Correct Score
                                                     </button>
@@ -335,7 +336,7 @@ export default function AdminGradeOversight({ navigate }: { navigate: (path: str
                 </div>
                 
                 <div className="p-4 border-t border-gray-200 bg-gray-50">
-                    <button className="w-full py-2.5 bg-white border border-gray-300 text-gray-700 font-bold rounded-lg hover:bg-gray-50 transition-colors flex justify-center items-center gap-2 text-sm shadow-sm">
+                    <button onClick={() => navigate('empty_state')} className="w-full py-2.5 bg-white border border-gray-300 text-gray-700 font-bold rounded-lg hover:bg-gray-50 transition-colors flex justify-center items-center gap-2 text-sm shadow-sm">
                         <FileText className="w-4 h-4" />
                         Download Full Audit Log
                     </button>

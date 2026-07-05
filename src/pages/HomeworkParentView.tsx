@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMockData } from '../store/MockDataContext';
 import { 
     LayoutDashboard, Users, BookOpen, FileText, Bell, 
     LogOut, Menu, FileX, BookMarked, Clock, Paperclip, CheckCircle2, AlertCircle, MessageSquare, User
@@ -19,48 +20,17 @@ export default function HomeworkParentView({ navigate }: { navigate: (path: stri
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
 
-    const homeworkList = [
-        {
-            id: 1,
-            subject: "English Language",
-            title: "Reading Comprehension: The Lion and the Mouse",
-            description: "Read the attached story and answer the 5 questions at the bottom of the page. Please ensure answers are written in full sentences.",
-            dueDate: "Tomorrow, 8:00 AM",
-            status: "pending",
-            attachment: "story_worksheet.pdf",
-            teacher: "Mrs. Osei"
-        },
-        {
-            id: 2,
-            subject: "Mathematics",
-            title: "Fractions Worksheet",
-            description: "Complete exercises 1 to 10 on page 45 of the mathematics workbook. Show all your working.",
-            dueDate: "Tomorrow, 10:00 AM",
-            status: "pending",
-            attachment: null,
-            teacher: "Mr. Addo"
-        },
-        {
-            id: 3,
-            subject: "Science",
-            title: "Plant Life Cycle Diagram",
-            description: "Draw and label the life cycle of a flowering plant. Use colors and make sure labels are clear.",
-            dueDate: "Friday, Oct 18",
-            status: "late",
-            attachment: "reference_diagram.jpg",
-            teacher: "Ms. Yeboah"
-        },
-        {
-            id: 4,
-            subject: "Social Studies",
-            title: "History of Independence",
-            description: "Write a short essay (150 words) about the significance of Ghana's independence. Submit via the portal.",
-            dueDate: "Completed",
-            status: "completed",
-            attachment: null,
-            teacher: "Mr. Mensah"
-        }
-    ];
+    const { homeworkRecords } = useMockData();
+    const homeworkList = homeworkRecords.map(hw => ({
+        id: hw.id,
+        subject: hw.subject,
+        title: hw.title,
+        description: hw.description,
+        dueDate: hw.dueDate,
+        status: hw.status === 'completed' ? 'submitted' : 'pending',
+        attachment: null,
+        teacher: 'Teacher'
+    }));
 
     const getStatusStyle = (status: string) => {
         switch (status) {
@@ -144,7 +114,7 @@ export default function HomeworkParentView({ navigate }: { navigate: (path: stri
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -170,7 +140,7 @@ export default function HomeworkParentView({ navigate }: { navigate: (path: stri
                             <p className="text-gray-600 font-semibold text-sm mt-1">Grade 4 Gold - Ghana Academy</p>
                         </div>
                         <div className="flex gap-2">
-                            <button className="px-4 py-2 bg-[#DCE6F1] text-[#1F3864] text-sm font-bold rounded-lg hover:bg-opacity-80 transition-colors">
+                            <button onClick={() => navigate('homework_parent')} className="px-4 py-2 bg-[#DCE6F1] text-[#1F3864] text-sm font-bold rounded-lg hover:bg-opacity-80 transition-colors">
                                 View Completed
                             </button>
                         </div>
@@ -209,13 +179,13 @@ export default function HomeworkParentView({ navigate }: { navigate: (path: stri
                                     
                                     <div className="flex items-center gap-3">
                                         {item.attachment && (
-                                            <button className="flex items-center gap-1.5 text-sm font-semibold text-gray-600 hover:text-[#1F3864] transition-colors border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50">
+                                            <button onClick={() => navigate('empty_state')} className="flex items-center gap-1.5 text-sm font-semibold text-gray-600 hover:text-[#1F3864] transition-colors border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50">
                                                 <Paperclip className="w-4 h-4" />
                                                 {item.attachment}
                                             </button>
                                         )}
                                         {item.status !== 'completed' && (
-                                            <button className="px-4 py-1.5 bg-[#1F3864] text-white text-sm font-bold rounded-lg hover:bg-[#162a4d] transition-colors active:scale-95">
+                                            <button onClick={() => navigate('homework_parent')} className="px-4 py-1.5 bg-[#1F3864] text-white text-sm font-bold rounded-lg hover:bg-[#162a4d] transition-colors active:scale-95">
                                                 Mark Done
                                             </button>
                                         )}

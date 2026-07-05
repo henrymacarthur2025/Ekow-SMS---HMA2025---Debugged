@@ -80,7 +80,7 @@ export default function ParentProfile({ navigate }: { navigate: (path: string) =
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -110,7 +110,7 @@ export default function ParentProfile({ navigate }: { navigate: (path: string) =
                             <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
                                 <div className="flex items-center justify-between mb-6">
                                     <h4 className="text-lg font-bold text-[#1F3864]">Personal Information</h4>
-                                    <button className="text-sm font-bold text-[#1F3864] border border-gray-300 px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">
+                                    <button onClick={() => navigate('parent_profile')} className="text-sm font-bold text-[#1F3864] border border-gray-300 px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">
                                         Edit Details
                                     </button>
                                 </div>
@@ -160,7 +160,7 @@ export default function ParentProfile({ navigate }: { navigate: (path: string) =
                                             <p className="text-base font-bold text-[#1F3864] mt-0.5 tracking-widest">••••••••</p>
                                         </div>
                                     </div>
-                                    <button className="text-sm font-bold text-[#1F3864] border border-gray-300 px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">
+                                    <button onClick={() => navigate('reset_password')} className="text-sm font-bold text-[#1F3864] border border-gray-300 px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">
                                         Change Password
                                     </button>
                                 </div>

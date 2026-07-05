@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMockData } from '../store/MockDataContext';
 import { 
     LayoutDashboard, Users, BookOpen, FileText, Bell, 
     LogOut, Menu, FileX, BookMarked, MessageSquare, User,
@@ -20,54 +21,26 @@ export default function TeacherHomeworkList({ navigate }: { navigate: (path: str
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
 
-    const initialHomework = [
-        {
-            id: 1,
-            title: "Fractions Worksheet #3",
-            className: "Grade 4 Gold",
-            subject: "Mathematics",
-            dueDate: "Tomorrow, 10:00 AM",
-            status: "pending", // pending, completed
-            completed: false
-        },
-        {
-            id: 2,
-            title: "Reading Comprehension: The Lion and the Mouse",
-            className: "Grade 4 Gold",
-            subject: "English Language",
-            dueDate: "Oct 20, 2024, 08:00 AM",
-            status: "pending",
-            completed: false
-        },
-        {
-            id: 3,
-            title: "Science Project: Plant Lifecycle",
-            className: "Grade 5 Silver",
-            subject: "Science",
-            dueDate: "Oct 15, 2024, 12:00 PM",
-            status: "completed",
-            completed: true
+    const { homeworkRecords, updateHomeworkStatus } = useMockData();
+    const homeworkList = homeworkRecords.map(hw => ({
+        id: hw.id,
+        title: hw.title,
+        className: hw.classStr,
+        subject: hw.subject,
+        dueDate: hw.dueDate,
+        status: hw.status,
+        completed: hw.status === 'completed'
+    }));
+
+    const toggleCompletion = (id: string) => {
+        const hw = homeworkRecords.find(h => h.id === id);
+        if (hw) {
+            updateHomeworkStatus(id, hw.status === 'completed' ? 'pending' : 'completed');
         }
-    ];
-
-    const [homeworkList, setHomeworkList] = useState(initialHomework);
-
-    const toggleCompletion = (id: number) => {
-        setHomeworkList(homeworkList.map(hw => {
-            if (hw.id === id) {
-                const isNowCompleted = !hw.completed;
-                return { 
-                    ...hw, 
-                    completed: isNowCompleted,
-                    status: isNowCompleted ? 'completed' : 'pending'
-                };
-            }
-            return hw;
-        }));
     };
 
-    const deleteHomework = (id: number) => {
-        setHomeworkList(homeworkList.filter(hw => hw.id !== id));
+    const deleteHomework = (id: string) => {
+        console.log('delete', id);
     };
 
     return (
@@ -125,7 +98,7 @@ export default function TeacherHomeworkList({ navigate }: { navigate: (path: str
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -171,7 +144,7 @@ export default function TeacherHomeworkList({ navigate }: { navigate: (path: str
                                 </thead>
                                 <tbody className="text-sm">
                                     {homeworkList.map((hw, i) => (
-                                        <tr key={hw.id} className={`border-b border-gray-100 transition-colors ${i % 2 !== 0 ? 'bg-[#DCE6F1]/20' : 'bg-white'}`}>
+                                        <tr key={hw.id as string} className={`border-b border-gray-100 transition-colors ${i % 2 !== 0 ? 'bg-[#DCE6F1]/20' : 'bg-white'}`}>
                                             <td className="py-4 px-5">
                                                 <p className="font-bold text-[#1F3864]">{hw.title}</p>
                                             </td>
@@ -187,7 +160,7 @@ export default function TeacherHomeworkList({ navigate }: { navigate: (path: str
                                             </td>
                                             <td className="py-4 px-5 text-center">
                                                 <button 
-                                                    onClick={() => toggleCompletion(hw.id)}
+                                                    onClick={() => toggleCompletion(hw.id as string)}
                                                     className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border transition-colors ${
                                                         hw.completed 
                                                             ? 'bg-green-100 text-green-700 border-green-200 hover:bg-green-200' 
@@ -209,14 +182,14 @@ export default function TeacherHomeworkList({ navigate }: { navigate: (path: str
                                             </td>
                                             <td className="py-4 px-5">
                                                 <div className="flex items-center justify-end gap-2">
-                                                    <button 
+                                                    <button onClick={() => navigate('empty_state')} 
                                                         className="p-2 text-gray-400 hover:text-[#1F3864] hover:bg-[#DCE6F1] rounded-lg transition-colors"
                                                         title="Edit Homework"
                                                     >
                                                         <Edit2 className="w-4 h-4" />
                                                     </button>
                                                     <button 
-                                                        onClick={() => deleteHomework(hw.id)}
+                                                        onClick={() => deleteHomework(hw.id as string)}
                                                         className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                                                         title="Delete Homework"
                                                     >

@@ -55,7 +55,7 @@ export default function SupportDashboard({ navigate }: { navigate: (path: string
 
             <header className="h-16 fixed top-0 right-0 left-0 md:left-[260px] bg-surface border-b border-outline-variant flex justify-between items-center px-4 md:px-8 z-40">
                 <div className="flex items-center gap-4">
-                    <button className="md:hidden text-primary">
+                    <button onClick={() => navigate('empty_state')} className="md:hidden text-primary">
                         <Menu className="w-6 h-6" />
                     </button>
                     <div className="relative group hidden sm:block">
@@ -65,8 +65,8 @@ export default function SupportDashboard({ navigate }: { navigate: (path: string
                 </div>
                 <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2">
-                        <button className="text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-colors"><Bell className="w-5 h-5" /></button>
-                        <button className="text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-colors"><Mail className="w-5 h-5" /></button>
+                        <button onClick={() => navigate('empty_state')} className="text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-colors"><Bell className="w-5 h-5" /></button>
+                        <button onClick={() => navigate('empty_state')} className="text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-colors"><Mail className="w-5 h-5" /></button>
                     </div>
                     <div className="h-8 w-px bg-outline-variant mx-2"></div>
                     <div className="flex items-center gap-3">
@@ -89,9 +89,9 @@ export default function SupportDashboard({ navigate }: { navigate: (path: string
                         </div>
                         <div className="mt-4 flex flex-wrap justify-center gap-2">
                             <span className="text-on-primary/60 text-sm">Popular:</span>
-                            <a className="text-on-primary text-sm underline hover:text-primary-fixed-dim" href="#">Reset Password</a>
-                            <a className="text-on-primary text-sm underline hover:text-primary-fixed-dim" href="#">Print Invoice</a>
-                            <a className="text-on-primary text-sm underline hover:text-primary-fixed-dim" href="#">Update Results</a>
+                            <button onClick={(e) => { e.preventDefault(); navigate('reset_password'); }} className="hover:text-primary transition-colors hover:underline bg-transparent border-none p-0 cursor-pointer text-inherit font-inherit">Reset Password</button>
+                            <button onClick={(e) => { e.preventDefault(); navigate('empty_state'); }} className="hover:text-primary transition-colors hover:underline bg-transparent border-none p-0 cursor-pointer text-inherit font-inherit">Print Invoice</button>
+                            <button onClick={(e) => { e.preventDefault(); navigate('empty_state'); }} className="hover:text-primary transition-colors hover:underline bg-transparent border-none p-0 cursor-pointer text-inherit font-inherit">Update Results</button>
                         </div>
                     </div>
                 </section>
@@ -149,7 +149,7 @@ export default function SupportDashboard({ navigate }: { navigate: (path: string
                                 <Mail className="w-10 h-10 text-primary mb-4" />
                                 <h4 className="text-base font-semibold text-primary mb-2">Email Support</h4>
                                 <p className="text-sm text-on-surface-variant mb-6">Send us a detailed message about your issue.</p>
-                                <button className="mt-auto w-full py-3 bg-primary text-on-primary rounded-lg text-base font-semibold hover:opacity-90 transition-opacity">support@schoollink.gh</button>
+                                <button onClick={() => navigate('empty_state')} className="mt-auto w-full py-3 bg-primary text-on-primary rounded-lg text-base font-semibold hover:opacity-90 transition-opacity">support@schoollink.gh</button>
                             </div>
                             <div className="bg-surface-container-lowest p-8 rounded-xl border border-primary flex flex-col items-center text-center relative shadow-lg">
                                 <div className="absolute -top-3 px-4 py-1 bg-primary text-on-primary text-[10px] font-bold rounded-full uppercase tracking-widest">Recommended</div>
@@ -160,13 +160,13 @@ export default function SupportDashboard({ navigate }: { navigate: (path: string
                                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                                     <span className="text-green-600 font-bold text-sm">We're Online</span>
                                 </div>
-                                <button className="mt-auto w-full py-3 bg-primary text-on-primary rounded-lg text-base font-semibold hover:opacity-90 transition-opacity">Start Chatting</button>
+                                <button onClick={() => navigate('empty_state')} className="mt-auto w-full py-3 bg-primary text-on-primary rounded-lg text-base font-semibold hover:opacity-90 transition-opacity">Start Chatting</button>
                             </div>
                             <div className="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant flex flex-col items-center text-center">
                                 <Phone className="w-10 h-10 text-primary mb-4" />
                                 <h4 className="text-base font-semibold text-primary mb-2">Call Us</h4>
                                 <p className="text-sm text-on-surface-variant mb-6">Speak directly with a support specialist.</p>
-                                <button className="mt-auto w-full py-3 border border-primary text-primary rounded-lg text-base font-semibold hover:bg-primary/5 transition-colors">+233 24 000 0000</button>
+                                <button onClick={() => navigate('empty_state')} className="mt-auto w-full py-3 border border-primary text-primary rounded-lg text-base font-semibold hover:bg-primary/5 transition-colors">+233 24 000 0000</button>
                             </div>
                         </div>
                     </div>
@@ -182,9 +182,9 @@ export default function SupportDashboard({ navigate }: { navigate: (path: string
                             <div className="flex gap-10">
                                 <div className="flex flex-col gap-2">
                                     <span className="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Resources</span>
-                                    <a className="text-sm text-primary hover:underline" href="#">User Manual</a>
-                                    <a className="text-sm text-primary hover:underline" href="#">Video Tutorials</a>
-                                    <a className="text-sm text-primary hover:underline" href="#">API Docs</a>
+                                    <button onClick={(e) => { e.preventDefault(); navigate('empty_state'); }} className="hover:text-primary transition-colors hover:underline bg-transparent border-none p-0 cursor-pointer text-inherit font-inherit">User Manual</button>
+                                    <button onClick={(e) => { e.preventDefault(); navigate('empty_state'); }} className="hover:text-primary transition-colors hover:underline bg-transparent border-none p-0 cursor-pointer text-inherit font-inherit">Video Tutorials</button>
+                                    <button onClick={(e) => { e.preventDefault(); navigate('empty_state'); }} className="hover:text-primary transition-colors hover:underline bg-transparent border-none p-0 cursor-pointer text-inherit font-inherit">API Docs</button>
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <span className="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Legal & Navigation</span>

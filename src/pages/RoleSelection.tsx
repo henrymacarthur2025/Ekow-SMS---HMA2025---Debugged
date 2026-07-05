@@ -64,7 +64,7 @@ export default function RoleSelection({ navigate }: { navigate: (path: string) =
                                 <LogOut className="w-4 h-4" /> Logout
                             </button>
                             <span className="text-outline-variant">|</span>
-                            <button className="text-primary text-xs font-bold hover:underline uppercase tracking-widest flex items-center gap-1">
+                            <button onClick={() => navigate('empty_state')} className="text-primary text-xs font-bold hover:underline uppercase tracking-widest flex items-center gap-1">
                                 <HelpCircle className="w-4 h-4" /> Need Help?
                             </button>
                         </div>

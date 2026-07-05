@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMockData } from '../store/MockDataContext';
 import { 
     LayoutDashboard, Users, BookOpen, FileText, Bell, 
     LogOut, Menu, FileX, BookMarked, MessageSquare, User,
@@ -131,7 +132,7 @@ export default function TeacherGradeHistory({ navigate }: { navigate: (path: str
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -219,7 +220,7 @@ export default function TeacherGradeHistory({ navigate }: { navigate: (path: str
                                     <div className="border-t border-gray-100 bg-gray-50/50 p-4 md:p-6">
                                         <div className="flex justify-between items-center mb-4">
                                             <h5 className="text-sm font-bold text-[#1F3864]">Student Scores for {record.name}</h5>
-                                            <button className="flex items-center gap-1.5 text-sm font-bold text-[#1F3864] hover:underline bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm">
+                                            <button onClick={() => navigate('empty_state')} className="flex items-center gap-1.5 text-sm font-bold text-[#1F3864] hover:underline bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm">
                                                 <Edit2 className="w-4 h-4" />
                                                 Edit / Correct
                                             </button>
@@ -236,7 +237,7 @@ export default function TeacherGradeHistory({ navigate }: { navigate: (path: str
                                                 </thead>
                                                 <tbody className="text-sm">
                                                     {record.students.map((student, i) => (
-                                                        <tr key={student.id} className={`border-b border-gray-100 ${i % 2 !== 0 ? 'bg-[#DCE6F1]/20' : 'bg-white'}`}>
+                                                        <tr key={student.id as any as string} className={`border-b border-gray-100 ${i % 2 !== 0 ? 'bg-[#DCE6F1]/20' : 'bg-white'}`}>
                                                             <td className="py-2.5 px-4 font-bold text-gray-500">{student.rollNumber}</td>
                                                             <td className="py-2.5 px-4 font-bold text-[#1F3864]">{student.name}</td>
                                                             <td className="py-2.5 px-4 text-center font-bold text-[#1F3864]">

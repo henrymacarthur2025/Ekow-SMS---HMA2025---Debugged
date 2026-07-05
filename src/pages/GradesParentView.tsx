@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMockData } from '../store/MockDataContext';
 import { 
     LayoutDashboard, Users, BookOpen, FileText, Bell, 
     LogOut, Menu, FileX, ChevronDown, FileBadge, MessageCircle, BookMarked, MessageSquare, User
@@ -20,40 +21,14 @@ export default function GradesParentView({ navigate }: { navigate: (path: string
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
 
-    const subjects = [
-        {
-            id: 1,
-            name: "Mathematics",
-            overallScore: "85%",
-            grade: "A",
-            assessments: [
-                { title: "Mid-Term Exam", score: "88/100", date: "Oct 10, 2024", comment: "Excellent progress in fractions." },
-                { title: "Class Quiz 1", score: "15/20", date: "Sep 25, 2024", comment: null },
-                { title: "Homework Average", score: "24/30", date: "Ongoing", comment: "Consistent effort." }
-            ]
-        },
-        {
-            id: 2,
-            name: "Science",
-            overallScore: "78%",
-            grade: "B+",
-            assessments: [
-                { title: "Mid-Term Exam", score: "75/100", date: "Oct 12, 2024", comment: "Needs more focus on plant biology." },
-                { title: "Lab Project", score: "18/20", date: "Sep 30, 2024", comment: "Great practical skills." }
-            ]
-        },
-        {
-            id: 3,
-            name: "English Language",
-            overallScore: "92%",
-            grade: "A+",
-            assessments: [
-                { title: "Mid-Term Exam", score: "90/100", date: "Oct 14, 2024", comment: "Outstanding essay writing." },
-                { title: "Reading Test", score: "20/20", date: "Oct 01, 2024", comment: null },
-                { title: "Spelling Bee", score: "10/10", date: "Sep 15, 2024", comment: "Perfect score!" }
-            ]
-        }
-    ];
+    const { gradeRecords } = useMockData();
+    const subjects = gradeRecords.filter(g => g.studentId === 'STU001').map(g => ({
+        id: g.id,
+        name: g.subject,
+        overallScore: g.overallScore + "%",
+        grade: g.grade,
+        assessments: g.assessments || []
+    }));
 
     return (
         <div className="bg-[#F7F8FA] min-h-screen text-[#1F3864] font-sans">
@@ -72,7 +47,7 @@ export default function GradesParentView({ navigate }: { navigate: (path: string
                 <nav className="flex-1 py-6 px-4 space-y-2">
                     {navItems.map((item, i) => (
                         <button 
-                            key={i}
+                            key={i as number}
                             onClick={() => {
                                 setIsMobileMenuOpen(false);
                                 if (item.path !== '#') navigate(item.path);
@@ -110,7 +85,7 @@ export default function GradesParentView({ navigate }: { navigate: (path: string
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -151,7 +126,7 @@ export default function GradesParentView({ navigate }: { navigate: (path: string
 
                     <div className="space-y-6">
                         {subjects.map((subject) => (
-                            <div key={subject.id} className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                            <div key={subject.id as string} className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
                                 <div className="p-5 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gray-50">
                                     <div className="flex items-center gap-2 text-[#1F3864]">
                                         <FileBadge className="w-6 h-6" />
@@ -182,7 +157,7 @@ export default function GradesParentView({ navigate }: { navigate: (path: string
                                         </thead>
                                         <tbody className="text-sm">
                                             {subject.assessments.map((assessment, i) => (
-                                                <tr key={i} className={`border-b border-gray-100 ${i % 2 !== 0 ? 'bg-[#DCE6F1]/40' : 'bg-white'}`}>
+                                                <tr key={i as number} className={`border-b border-gray-100 ${i % 2 !== 0 ? 'bg-[#DCE6F1]/40' : 'bg-white'}`}>
                                                     <td className="py-4 px-5 font-bold text-[#1F3864]">{assessment.title}</td>
                                                     <td className="py-4 px-5 font-semibold text-gray-600">{assessment.date}</td>
                                                     <td className="py-4 px-5 font-bold text-[#1F3864]">{assessment.score}</td>
@@ -212,7 +187,7 @@ export default function GradesParentView({ navigate }: { navigate: (path: string
             <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center p-2 z-40 pb-safe">
                 {navItems.filter(item => item.label !== 'Logout').map((item, i) => (
                     <button 
-                        key={i}
+                        key={i as number}
                         onClick={() => {
                             if (item.path !== '#') navigate(item.path);
                         }}

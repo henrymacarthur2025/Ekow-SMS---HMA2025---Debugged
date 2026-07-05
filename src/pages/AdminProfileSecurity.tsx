@@ -105,7 +105,7 @@ export default function AdminProfileSecurity({ navigate }: AdminProfileSecurityP
                 <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between sticky top-0 z-20">
                     <h1 className="text-2xl font-bold text-[#1F3864]">Profile & Security</h1>
                     <div className="hidden md:flex items-center gap-4">
-                        <button className="p-2 text-gray-400 hover:text-[#1F3864] transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-400 hover:text-[#1F3864] transition-colors relative">
                             <Bell className="w-6 h-6" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -129,7 +129,7 @@ export default function AdminProfileSecurity({ navigate }: AdminProfileSecurityP
                                     <h2 className="text-lg font-bold text-[#1F3864]">Personal Information</h2>
                                     <p className="text-sm text-gray-500 mt-1">Manage your admin profile details.</p>
                                 </div>
-                                <button className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors whitespace-nowrap">
+                                <button onClick={() => navigate('admin_profile_security')} className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors whitespace-nowrap">
                                     Edit Profile
                                 </button>
                             </div>
@@ -191,7 +191,7 @@ export default function AdminProfileSecurity({ navigate }: AdminProfileSecurityP
                                     />
                                 </div>
                                 <div className="pt-2">
-                                    <button className="px-6 py-2.5 bg-[#1F3864] text-white rounded-lg font-medium hover:bg-[#152643] transition-colors">
+                                    <button onClick={() => navigate('reset_password')} className="px-6 py-2.5 bg-[#1F3864] text-white rounded-lg font-medium hover:bg-[#152643] transition-colors">
                                         Update Password
                                     </button>
                                 </div>
@@ -242,7 +242,7 @@ export default function AdminProfileSecurity({ navigate }: AdminProfileSecurityP
                                                 </td>
                                                 <td className="p-4 text-right">
                                                     {!session.isCurrent ? (
-                                                        <button className="px-3 py-1.5 border border-red-200 text-red-600 rounded hover:bg-red-50 font-medium transition-colors">
+                                                        <button onClick={() => navigate('logout_confirmation')} className="px-3 py-1.5 border border-red-200 text-red-600 rounded hover:bg-red-50 font-medium transition-colors">
                                                             Log Out
                                                         </button>
                                                     ) : (

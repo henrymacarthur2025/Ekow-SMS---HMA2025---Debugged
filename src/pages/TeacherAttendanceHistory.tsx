@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMockData } from '../store/MockDataContext';
 import { 
     LayoutDashboard, Users, BookOpen, FileText, Bell, 
     LogOut, Menu, FileX, BookMarked, MessageSquare, User,
@@ -22,40 +23,31 @@ export default function TeacherAttendanceHistory({ navigate }: { navigate: (path
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
 
-    const historyData = [
-        {
-            date: "Oct 15, 2024",
-            day: "Tuesday",
-            summary: { total: 32, present: 30, absent: 1, late: 1 },
-            students: [
-                { id: 1, name: 'Abigail Appiah', rollNumber: '001', status: 'present' },
-                { id: 2, name: 'Benjamin Boakye', rollNumber: '002', status: 'present' },
-                { id: 3, name: 'Cynthia Cudjoe', rollNumber: '003', status: 'absent' },
-                { id: 5, name: 'Ebenezer Essien', rollNumber: '005', status: 'late' },
-            ]
-        },
-        {
-            date: "Oct 14, 2024",
-            day: "Monday",
-            summary: { total: 32, present: 32, absent: 0, late: 0 },
-            students: [
-                { id: 1, name: 'Abigail Appiah', rollNumber: '001', status: 'present' },
-                { id: 2, name: 'Benjamin Boakye', rollNumber: '002', status: 'present' },
-                { id: 3, name: 'Cynthia Cudjoe', rollNumber: '003', status: 'present' },
-            ]
-        },
-        {
-            date: "Oct 11, 2024",
-            day: "Friday",
-            summary: { total: 32, present: 29, absent: 2, late: 1 },
-            students: [
-                { id: 1, name: 'Abigail Appiah', rollNumber: '001', status: 'present' },
-                { id: 3, name: 'Cynthia Cudjoe', rollNumber: '003', status: 'absent' },
-                { id: 4, name: 'Daniel Dankwa', rollNumber: '004', status: 'absent' },
-                { id: 8, name: 'Hannah Hammond', rollNumber: '008', status: 'late' },
-            ]
+    const { students, attendanceRecords } = useMockData();
+    // Group records by date
+    const grouped = attendanceRecords.reduce((acc, record) => {
+        if (!acc[record.date]) {
+            acc[record.date] = {
+                date: record.date,
+                day: record.day || 'Day',
+                summary: { total: 0, present: 0, absent: 0, late: 0 },
+                students: []
+            };
         }
-    ];
+        const student = students.find(s => s.id === record.studentId);
+        if (student) {
+            acc[record.date].summary.total++;
+            acc[record.date].summary[record.status as 'present'|'absent'|'late']++;
+            acc[record.date].students.push({
+                id: student.id,
+                name: student.name,
+                rollNumber: student.rollNumber,
+                status: record.status
+            });
+        }
+        return acc;
+    }, {} as Record<string, any>);
+    const historyData = (Object.values(grouped) as any[]).sort((a: any, b: any) => b.date.localeCompare(a.date));
 
     const toggleExpand = (date: string) => {
         if (expandedDay === date) {
@@ -134,7 +126,7 @@ export default function TeacherAttendanceHistory({ navigate }: { navigate: (path
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -224,7 +216,7 @@ export default function TeacherAttendanceHistory({ navigate }: { navigate: (path
                                     <div className="border-t border-gray-100 bg-gray-50/50 p-4 md:p-6">
                                         <div className="flex justify-between items-center mb-4">
                                             <h5 className="text-sm font-bold text-[#1F3864]">Class Roster for {record.date}</h5>
-                                            <button className="flex items-center gap-1.5 text-sm font-bold text-[#1F3864] hover:underline bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm">
+                                            <button onClick={() => navigate('empty_state')} className="flex items-center gap-1.5 text-sm font-bold text-[#1F3864] hover:underline bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm">
                                                 <Edit2 className="w-4 h-4" />
                                                 Edit / Correct
                                             </button>
@@ -240,7 +232,7 @@ export default function TeacherAttendanceHistory({ navigate }: { navigate: (path
                                                 </thead>
                                                 <tbody className="text-sm">
                                                     {record.students.map((student, i) => (
-                                                        <tr key={student.id} className={`border-b border-gray-100 ${i % 2 !== 0 ? 'bg-[#DCE6F1]/20' : 'bg-white'}`}>
+                                                        <tr key={student.id as any as string} className={`border-b border-gray-100 ${i % 2 !== 0 ? 'bg-[#DCE6F1]/20' : 'bg-white'}`}>
                                                             <td className="py-2.5 px-4 font-bold text-gray-500">{student.rollNumber}</td>
                                                             <td className="py-2.5 px-4 font-bold text-[#1F3864]">{student.name}</td>
                                                             <td className="py-2.5 px-4 text-right">

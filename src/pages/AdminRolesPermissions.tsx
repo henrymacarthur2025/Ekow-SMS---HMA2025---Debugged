@@ -14,10 +14,10 @@ export default function AdminRolesPermissions({ navigate }: { navigate: (path: s
         { icon: Users, label: 'Teachers', path: 'admin_teachers', active: false },
         { icon: Shield, label: 'Administrators', path: 'admin_accounts', active: false },
         { icon: Lock, label: 'Roles', path: 'admin_roles', active: true },
-        { icon: Building2, label: 'Classes', path: '#', active: false },
-        { icon: CalendarCheck, label: 'Attendance', path: '#', active: false },
-        { icon: MessageSquare, label: 'Announcements', path: '#', active: false },
-        { icon: Settings, label: 'Settings', path: '#', active: false },
+        { icon: Building2, label: 'Classes', path: 'admin_classes', active: false },
+        { icon: CalendarCheck, label: 'Attendance', path: 'admin_attendance_oversight', active: false },
+        { icon: MessageSquare, label: 'Announcements', path: 'admin_announcements', active: false },
+        { icon: Settings, label: 'Settings', path: 'admin_school_profile', active: false },
         { icon: LogOut, label: 'Logout', path: 'login', active: false },
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
@@ -134,7 +134,7 @@ export default function AdminRolesPermissions({ navigate }: { navigate: (path: s
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -157,7 +157,7 @@ export default function AdminRolesPermissions({ navigate }: { navigate: (path: s
                             <h2 className="text-2xl font-bold text-[#1F3864] mb-1">Roles & Permissions</h2>
                             <p className="text-sm text-gray-500 font-semibold">Define roles and module-level access for staff members.</p>
                         </div>
-                        <button 
+                        <button onClick={() => navigate('empty_state')} 
                             className="w-full sm:w-auto bg-[#1F3864] text-white px-4 py-2.5 rounded-lg font-bold hover:bg-[#2a4d8a] transition-colors flex items-center justify-center gap-2 shadow-sm"
                         >
                             <Plus className="w-5 h-5" />
@@ -261,7 +261,7 @@ export default function AdminRolesPermissions({ navigate }: { navigate: (path: s
                                     </div>
                                 </div>
                                 <div className="p-4 bg-gray-50 border-t border-gray-100 flex gap-2">
-                                    <button className="flex-1 bg-white border border-gray-200 text-gray-700 font-bold py-2 rounded-lg hover:bg-gray-100 transition-colors text-sm">
+                                    <button onClick={() => navigate('parent_profile')} className="flex-1 bg-white border border-gray-200 text-gray-700 font-bold py-2 rounded-lg hover:bg-gray-100 transition-colors text-sm">
                                         Edit Details
                                     </button>
                                 </div>

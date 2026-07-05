@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMockData } from '../store/MockDataContext';
 import { 
     LayoutDashboard, Users, BookOpen, FileText, Bell, 
     LogOut, Menu, FileX, BookMarked, MessageSquare, User,
@@ -33,11 +34,11 @@ export default function TeacherGradeEntry({ navigate }: { navigate: (path: strin
 
     const [students, setStudents] = useState(initialStudents);
 
-    const handleScoreChange = (id: number, value: string) => {
+    const handleScoreChange = (id: string, value: string) => {
         setStudents(students.map(s => s.id === id ? { ...s, score: value } : s));
     };
 
-    const handleCommentChange = (id: number, value: string) => {
+    const handleCommentChange = (id: string, value: string) => {
         setStudents(students.map(s => s.id === id ? { ...s, comment: value } : s));
     };
 
@@ -101,7 +102,7 @@ export default function TeacherGradeEntry({ navigate }: { navigate: (path: strin
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -169,7 +170,7 @@ export default function TeacherGradeEntry({ navigate }: { navigate: (path: strin
                                 </thead>
                                 <tbody className="text-sm">
                                     {students.map((student, i) => (
-                                        <tr key={student.id} className={`border-b border-gray-100 transition-colors ${i % 2 !== 0 ? 'bg-[#DCE6F1]/20' : 'bg-white'}`}>
+                                        <tr key={student.id as string} className={`border-b border-gray-100 transition-colors ${i % 2 !== 0 ? 'bg-[#DCE6F1]/20' : 'bg-white'}`}>
                                             <td className="py-3 px-5 font-bold text-gray-500">{student.rollNumber}</td>
                                             <td className="py-3 px-5 font-bold text-[#1F3864]">
                                                 <div className="flex items-center gap-3">
@@ -186,7 +187,7 @@ export default function TeacherGradeEntry({ navigate }: { navigate: (path: strin
                                                     max="100"
                                                     placeholder="0"
                                                     value={student.score}
-                                                    onChange={(e) => handleScoreChange(student.id, e.target.value)}
+                                                    onChange={(e) => handleScoreChange(student.id as string, e.target.value)}
                                                     className="w-full text-center border border-gray-300 rounded-md py-1.5 focus:outline-none focus:border-[#1F3864] focus:ring-1 focus:ring-[#1F3864] font-bold text-[#1F3864] transition-colors"
                                                 />
                                             </td>
@@ -195,7 +196,7 @@ export default function TeacherGradeEntry({ navigate }: { navigate: (path: strin
                                                     type="text" 
                                                     placeholder="Add a remark..."
                                                     value={student.comment}
-                                                    onChange={(e) => handleCommentChange(student.id, e.target.value)}
+                                                    onChange={(e) => handleCommentChange(student.id as string, e.target.value)}
                                                     className="w-full border border-gray-300 rounded-md px-3 py-1.5 focus:outline-none focus:border-[#1F3864] focus:ring-1 focus:ring-[#1F3864] text-gray-700 transition-colors"
                                                 />
                                             </td>
@@ -214,10 +215,10 @@ export default function TeacherGradeEntry({ navigate }: { navigate: (path: strin
                         >
                             View History
                         </button>
-                        <button className="px-6 py-2.5 bg-white border border-gray-200 text-gray-600 font-bold rounded-lg hover:bg-gray-50 transition-colors w-full sm:w-auto">
+                        <button onClick={() => navigate('teacher_grades_entry')} className="px-6 py-2.5 bg-white border border-gray-200 text-gray-600 font-bold rounded-lg hover:bg-gray-50 transition-colors w-full sm:w-auto">
                             Save as Draft
                         </button>
-                        <button className="px-6 py-2.5 bg-[#1F3864] text-white font-bold rounded-lg hover:bg-[#162a4d] transition-colors shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto">
+                        <button onClick={() => navigate('empty_state')} className="px-6 py-2.5 bg-[#1F3864] text-white font-bold rounded-lg hover:bg-[#162a4d] transition-colors shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto">
                             <Save className="w-4 h-4" />
                             Submit Grades
                         </button>

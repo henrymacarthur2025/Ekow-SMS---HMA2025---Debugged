@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMockData } from '../store/MockDataContext';
 import { 
     LayoutDashboard, Users, BookOpen, FileText, Bell, 
     LogOut, Menu, FileX, BookMarked, MessageSquare, ArrowLeft, Paperclip, Download, User
@@ -19,18 +20,18 @@ export default function AnnouncementDetailParentView({ navigate }: { navigate: (
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
 
+    const { announcements } = useMockData();
+    const globalAnnouncement = announcements[0]; // just grab the first one for the mock detail view
     const announcement = {
-        id: 1,
-        title: "Upcoming PTA Meeting & Termly Report",
-        message: "Dear Parents,\n\nWe would like to invite you to our termly Parent-Teacher Association (PTA) meeting scheduled for this coming Friday. The meeting will be held in the main school assembly hall.\n\nWe will be discussing the upcoming school renovations, the new extra-curricular programs being introduced next term, and the academic performance report of the current term.\n\nYour attendance is highly anticipated as important decisions regarding the new sports facilities will be voted upon. We have attached the agenda for the meeting and the previous meeting's minutes for your perusal.\n\nThank you for your continuous support.\n\nBest Regards,\nPrincipal's Office\nGhana Academy",
-        date: "Oct 15, 2024",
-        time: "09:00 AM",
-        sender: "Principal's Office",
-        type: "Event",
-        attachments: [
-            { name: "PTA_Meeting_Agenda_Oct.pdf", size: "1.2 MB", type: "pdf" },
-            { name: "Previous_Minutes_Sep.pdf", size: "850 KB", type: "pdf" }
-        ]
+        title: globalAnnouncement.title,
+        message: globalAnnouncement.content || "Details for this announcement...",
+        date: globalAnnouncement.date,
+        time: "10:00 AM",
+        sender: globalAnnouncement.sender,
+        type: globalAnnouncement.scope,
+        attachments: globalAnnouncement.hasAttachment ? [
+            { name: "Meeting_Agenda.pdf", size: "245 KB", type: "pdf" },
+        ] : []
     };
 
     return (
@@ -88,7 +89,7 @@ export default function AnnouncementDetailParentView({ navigate }: { navigate: (
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -167,7 +168,7 @@ export default function AnnouncementDetailParentView({ navigate }: { navigate: (
                                                     <p className="text-xs font-semibold text-gray-500 uppercase">{attachment.type} • {attachment.size}</p>
                                                 </div>
                                             </div>
-                                            <button className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-[#DCE6F1] group-hover:text-[#1F3864] transition-colors shrink-0">
+                                            <button onClick={() => navigate('empty_state')} className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-[#DCE6F1] group-hover:text-[#1F3864] transition-colors shrink-0">
                                                 <Download className="w-4 h-4" />
                                             </button>
                                         </div>

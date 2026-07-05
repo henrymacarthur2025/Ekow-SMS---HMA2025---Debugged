@@ -41,9 +41,9 @@ export default function AdminSubjectForm({ navigate }: { navigate: (path: string
         { icon: Contact, label: 'Guardians', path: 'admin_parents', active: false },
         { icon: Building2, label: 'Classes', path: 'admin_classes', active: false },
         { icon: BookOpen, label: 'Subjects', path: 'admin_subjects', active: true },
-        { icon: CalendarCheck, label: 'Attendance', path: '#', active: false },
-        { icon: MessageSquare, label: 'Announcements', path: '#', active: false },
-        { icon: Settings, label: 'Settings', path: '#', active: false },
+        { icon: CalendarCheck, label: 'Attendance', path: 'admin_attendance_oversight', active: false },
+        { icon: MessageSquare, label: 'Announcements', path: 'admin_announcements', active: false },
+        { icon: Settings, label: 'Settings', path: 'admin_school_profile', active: false },
         { icon: LogOut, label: 'Logout', path: 'login', active: false },
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
@@ -112,7 +112,7 @@ export default function AdminSubjectForm({ navigate }: { navigate: (path: string
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>

@@ -12,10 +12,10 @@ export default function AdminDashboard({ navigate }: { navigate: (path: string) 
         { icon: LayoutDashboard, label: 'Dashboard', path: 'admin_dashboard', active: true },
         { icon: GraduationCap, label: 'Students', path: 'admin_students', active: false },
         { icon: Users, label: 'Teachers', path: 'admin_teachers', active: false },
-        { icon: Building2, label: 'Classes', path: '#', active: false },
-        { icon: CalendarCheck, label: 'Attendance', path: '#', active: false },
-        { icon: MessageSquare, label: 'Announcements', path: '#', active: false },
-        { icon: Settings, label: 'Settings', path: '#', active: false },
+        { icon: Building2, label: 'Classes', path: 'admin_classes', active: false },
+        { icon: CalendarCheck, label: 'Attendance', path: 'admin_attendance_oversight', active: false },
+        { icon: MessageSquare, label: 'Announcements', path: 'admin_announcements', active: false },
+        { icon: Settings, label: 'Settings', path: 'admin_school_profile', active: false },
         { icon: LogOut, label: 'Logout', path: 'login', active: false },
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
@@ -89,7 +89,7 @@ export default function AdminDashboard({ navigate }: { navigate: (path: string) 
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                             <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
                         </button>
@@ -162,7 +162,7 @@ export default function AdminDashboard({ navigate }: { navigate: (path: string) 
                                         <span className="block text-xs font-semibold text-gray-500">Onboard a staff member</span>
                                     </div>
                                 </button>
-                                <button className="bg-[#F7F8FA] border border-gray-200 text-[#1F3864] rounded-lg p-4 flex items-center gap-4 hover:bg-[#DCE6F1] transition-colors shadow-sm text-left">
+                                <button onClick={() => navigate('empty_state')} className="bg-[#F7F8FA] border border-gray-200 text-[#1F3864] rounded-lg p-4 flex items-center gap-4 hover:bg-[#DCE6F1] transition-colors shadow-sm text-left">
                                     <div className="bg-white p-2 rounded-lg shadow-sm">
                                         <Megaphone className="w-5 h-5 text-[#1F3864]" />
                                     </div>
@@ -171,7 +171,7 @@ export default function AdminDashboard({ navigate }: { navigate: (path: string) 
                                         <span className="block text-xs font-semibold text-gray-500">Broadcast a message</span>
                                     </div>
                                 </button>
-                                <button className="bg-[#F7F8FA] border border-gray-200 text-[#1F3864] rounded-lg p-4 flex items-center gap-4 hover:bg-[#DCE6F1] transition-colors shadow-sm text-left">
+                                <button onClick={() => navigate('empty_state')} className="bg-[#F7F8FA] border border-gray-200 text-[#1F3864] rounded-lg p-4 flex items-center gap-4 hover:bg-[#DCE6F1] transition-colors shadow-sm text-left">
                                     <div className="bg-white p-2 rounded-lg shadow-sm">
                                         <ClipboardList className="w-5 h-5 text-[#1F3864]" />
                                     </div>
@@ -205,7 +205,7 @@ export default function AdminDashboard({ navigate }: { navigate: (path: string) 
                                     </div>
                                 ))}
                             </div>
-                            <button className="w-full mt-4 py-2.5 text-sm font-bold text-[#1F3864] border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                            <button onClick={() => navigate('admin_activity_log')} className="w-full mt-4 py-2.5 text-sm font-bold text-[#1F3864] border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
                                 View All Activity
                             </button>
                         </div>

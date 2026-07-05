@@ -13,10 +13,10 @@ export default function AdminBulkImport({ navigate }: { navigate: (path: string)
         { icon: LayoutDashboard, label: 'Dashboard', path: 'admin_dashboard', active: false },
         { icon: GraduationCap, label: 'Students', path: 'admin_students', active: true },
         { icon: Users, label: 'Teachers', path: 'admin_teachers', active: false },
-        { icon: Building2, label: 'Classes', path: '#', active: false },
-        { icon: CalendarCheck, label: 'Attendance', path: '#', active: false },
-        { icon: MessageSquare, label: 'Announcements', path: '#', active: false },
-        { icon: Settings, label: 'Settings', path: '#', active: false },
+        { icon: Building2, label: 'Classes', path: 'admin_classes', active: false },
+        { icon: CalendarCheck, label: 'Attendance', path: 'admin_attendance_oversight', active: false },
+        { icon: MessageSquare, label: 'Announcements', path: 'admin_announcements', active: false },
+        { icon: Settings, label: 'Settings', path: 'admin_school_profile', active: false },
         { icon: LogOut, label: 'Logout', path: 'login', active: false },
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
@@ -104,7 +104,7 @@ export default function AdminBulkImport({ navigate }: { navigate: (path: string)
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -178,7 +178,7 @@ export default function AdminBulkImport({ navigate }: { navigate: (path: string)
                                     <h5 className="font-bold text-[#1F3864] mb-1">Need a template?</h5>
                                     <p className="text-xs text-gray-500 font-semibold">Download our standard CSV format to ensure smooth processing.</p>
                                 </div>
-                                <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-[#1F3864] font-bold rounded-lg hover:bg-gray-200 transition-colors whitespace-nowrap">
+                                <button onClick={() => navigate('empty_state')} className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-[#1F3864] font-bold rounded-lg hover:bg-gray-200 transition-colors whitespace-nowrap">
                                     <Download className="w-4 h-4" /> Download Template
                                 </button>
                             </div>

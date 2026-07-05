@@ -131,7 +131,7 @@ export default function AdminHelpSupport({ navigate }: AdminHelpSupportProps) {
                 <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between sticky top-0 z-20">
                     <h1 className="text-2xl font-bold text-[#1F3864]">Help & Support Management</h1>
                     <div className="hidden md:flex items-center gap-4">
-                        <button className="p-2 text-gray-400 hover:text-[#1F3864] transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-400 hover:text-[#1F3864] transition-colors relative">
                             <Bell className="w-6 h-6" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -184,7 +184,7 @@ export default function AdminHelpSupport({ navigate }: AdminHelpSupportProps) {
                                     </div>
                                 </div>
                                 <div className="pt-2 flex justify-end">
-                                    <button className="px-6 py-2.5 bg-[#1F3864] text-white rounded-lg font-medium hover:bg-[#152643] transition-colors">
+                                    <button onClick={() => navigate('admin_dashboard')} className="px-6 py-2.5 bg-[#1F3864] text-white rounded-lg font-medium hover:bg-[#152643] transition-colors">
                                         Save Contact Info
                                     </button>
                                 </div>
@@ -198,7 +198,7 @@ export default function AdminHelpSupport({ navigate }: AdminHelpSupportProps) {
                                     <h2 className="text-lg font-bold text-[#1F3864]">Frequently Asked Questions (FAQs)</h2>
                                     <p className="text-sm text-gray-500 mt-1">Manage the help articles available to users.</p>
                                 </div>
-                                <button className="flex items-center gap-2 px-4 py-2 bg-[#1F3864] text-white rounded-lg font-medium hover:bg-[#152643] transition-colors whitespace-nowrap">
+                                <button onClick={() => navigate('empty_state')} className="flex items-center gap-2 px-4 py-2 bg-[#1F3864] text-white rounded-lg font-medium hover:bg-[#152643] transition-colors whitespace-nowrap">
                                     <Plus className="w-4 h-4" />
                                     Add FAQ
                                 </button>
@@ -225,11 +225,11 @@ export default function AdminHelpSupport({ navigate }: AdminHelpSupportProps) {
                                                     {faq.answer}
                                                 </p>
                                                 <div className="flex justify-end gap-3">
-                                                    <button className="flex items-center gap-2 px-3 py-1.5 border border-gray-300 text-gray-700 rounded hover:bg-gray-100 font-medium text-sm transition-colors">
+                                                    <button onClick={() => navigate('empty_state')} className="flex items-center gap-2 px-3 py-1.5 border border-gray-300 text-gray-700 rounded hover:bg-gray-100 font-medium text-sm transition-colors">
                                                         <Edit2 className="w-4 h-4" />
                                                         Edit
                                                     </button>
-                                                    <button className="flex items-center gap-2 px-3 py-1.5 border border-red-200 text-red-600 rounded hover:bg-red-50 font-medium text-sm transition-colors">
+                                                    <button onClick={() => navigate('empty_state')} className="flex items-center gap-2 px-3 py-1.5 border border-red-200 text-red-600 rounded hover:bg-red-50 font-medium text-sm transition-colors">
                                                         <Trash2 className="w-4 h-4" />
                                                         Delete
                                                     </button>

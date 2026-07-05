@@ -12,10 +12,10 @@ export default function AdminTeacherDetail({ navigate }: { navigate: (path: stri
         { icon: LayoutDashboard, label: 'Dashboard', path: 'admin_dashboard', active: false },
         { icon: GraduationCap, label: 'Students', path: 'admin_students', active: false },
         { icon: Users, label: 'Teachers', path: 'admin_teachers', active: true },
-        { icon: Building2, label: 'Classes', path: '#', active: false },
-        { icon: CalendarCheck, label: 'Attendance', path: '#', active: false },
-        { icon: MessageSquare, label: 'Announcements', path: '#', active: false },
-        { icon: Settings, label: 'Settings', path: '#', active: false },
+        { icon: Building2, label: 'Classes', path: 'admin_classes', active: false },
+        { icon: CalendarCheck, label: 'Attendance', path: 'admin_attendance_oversight', active: false },
+        { icon: MessageSquare, label: 'Announcements', path: 'admin_announcements', active: false },
+        { icon: Settings, label: 'Settings', path: 'admin_school_profile', active: false },
         { icon: LogOut, label: 'Logout', path: 'login', active: false },
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
@@ -100,7 +100,7 @@ export default function AdminTeacherDetail({ navigate }: { navigate: (path: stri
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -190,7 +190,7 @@ export default function AdminTeacherDetail({ navigate }: { navigate: (path: stri
                                         <span className="font-semibold text-gray-600">Last Login</span>
                                         <span className="font-bold text-[#1F3864]">Today, 08:12 AM</span>
                                     </div>
-                                    <button className="w-full mt-2 py-2.5 text-sm font-bold text-red-600 bg-red-50 border border-red-100 rounded-lg hover:bg-red-100 transition-colors">
+                                    <button onClick={() => navigate('admin_teacher_detail')} className="w-full mt-2 py-2.5 text-sm font-bold text-red-600 bg-red-50 border border-red-100 rounded-lg hover:bg-red-100 transition-colors">
                                         Suspend Account
                                     </button>
                                 </div>
@@ -237,7 +237,7 @@ export default function AdminTeacherDetail({ navigate }: { navigate: (path: stri
                                         <Clock className="w-5 h-5 text-gray-400" />
                                         Recent Activity Log
                                     </h4>
-                                    <button className="text-sm font-bold text-[#1F3864] hover:underline">View All</button>
+                                    <button onClick={() => navigate('announcements_parent')} className="text-sm font-bold text-[#1F3864] hover:underline">View All</button>
                                 </div>
                                 <div className="overflow-x-auto">
                                     <table className="w-full text-left border-collapse min-w-[600px]">

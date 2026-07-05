@@ -115,7 +115,7 @@ export default function AdminMediaLibrary({ navigate }: { navigate: (path: strin
                         <h2 className="text-xl font-bold text-[#1F3864] hidden sm:block">Attachments & Media Library</h2>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -221,13 +221,13 @@ export default function AdminMediaLibrary({ navigate }: { navigate: (path: strin
                                                 </td>
                                                 <td className="py-4 px-5 text-right">
                                                     <div className="flex items-center justify-end gap-2">
-                                                        <button 
+                                                        <button onClick={() => navigate('empty_state')} 
                                                             className="p-1.5 text-gray-500 hover:text-[#1F3864] hover:bg-[#DCE6F1] rounded-lg transition-colors"
                                                             title="Preview"
                                                         >
                                                             <Eye className="w-4 h-4" />
                                                         </button>
-                                                        <button 
+                                                        <button onClick={() => navigate('empty_state')} 
                                                             className="p-1.5 text-gray-500 hover:text-[#1F3864] hover:bg-[#DCE6F1] rounded-lg transition-colors"
                                                             title="Download"
                                                         >

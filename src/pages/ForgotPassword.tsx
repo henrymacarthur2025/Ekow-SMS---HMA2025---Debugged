@@ -79,7 +79,7 @@ export default function ForgotPassword({ navigate }: { navigate: (path: string) 
                             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                             <span className="text-sm">Back to Login</span>
                         </button>
-                        <button className="text-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
+                        <button onClick={() => navigate('empty_state')} className="text-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
                             <HelpCircle className="w-4 h-4" /> Need help?
                         </button>
                     </footer>
@@ -88,9 +88,9 @@ export default function ForgotPassword({ navigate }: { navigate: (path: string) 
                 <div className="mt-8 text-center space-y-2 opacity-60">
                     <p className="text-sm text-on-surface-variant">© 2024 SchoolLink Education Management System</p>
                     <div className="flex justify-center gap-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest">
-                        <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
+                        <button onClick={(e) => { e.preventDefault(); navigate('legal'); }} className="hover:text-primary transition-colors hover:underline bg-transparent border-none p-0 cursor-pointer text-inherit font-inherit">Privacy Policy</button>
                         <span>•</span>
-                        <a href="#" className="hover:text-primary transition-colors">Service Terms</a>
+                        <button onClick={(e) => { e.preventDefault(); navigate('legal'); }} className="hover:text-primary transition-colors hover:underline bg-transparent border-none p-0 cursor-pointer text-inherit font-inherit">Service Terms</button>
                         <span>•</span>
                         <button onClick={() => navigate('sitemap')} className="hover:text-primary transition-colors uppercase font-bold opacity-100 text-primary">Sitemap</button>
                     </div>

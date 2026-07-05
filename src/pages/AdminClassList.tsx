@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMockData } from '../store/MockDataContext';
 import { 
     LayoutDashboard, Users, GraduationCap, Building2, CalendarCheck, 
     Bell, LogOut, Menu, MessageSquare, Settings, Contact, Shield,
@@ -17,22 +18,18 @@ export default function AdminClassList({ navigate }: { navigate: (path: string) 
         { icon: Shield, label: 'Administrators', path: 'admin_accounts', active: false },
         { icon: Contact, label: 'Guardians', path: 'admin_parents', active: false },
         { icon: Building2, label: 'Classes', path: 'admin_classes', active: true },
-        { icon: CalendarCheck, label: 'Attendance', path: '#', active: false },
-        { icon: MessageSquare, label: 'Announcements', path: '#', active: false },
-        { icon: Settings, label: 'Settings', path: '#', active: false },
+        { icon: CalendarCheck, label: 'Attendance', path: 'admin_attendance_oversight', active: false },
+        { icon: MessageSquare, label: 'Announcements', path: 'admin_announcements', active: false },
+        { icon: Settings, label: 'Settings', path: 'admin_school_profile', active: false },
         { icon: LogOut, label: 'Logout', path: 'login', active: false },
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
 
-    const classData = [
-        { id: 1, name: 'Grade 1 Blue', level: 'Grade 1', year: '2023/2024', term: 'Term 1', teacher: 'Mrs. Sarah Osei', students: 24 },
-        { id: 2, name: 'Grade 1 Gold', level: 'Grade 1', year: '2023/2024', term: 'Term 1', teacher: 'Mr. John Amoah', students: 22 },
-        { id: 3, name: 'Grade 2 Blue', level: 'Grade 2', year: '2023/2024', term: 'Term 1', teacher: 'Ms. Grace Addo', students: 25 },
-        { id: 4, name: 'Grade 3 Silver', level: 'Grade 3', year: '2023/2024', term: 'Term 1', teacher: 'Mrs. Mary Boakye', students: 28 },
-        { id: 5, name: 'Grade 4 Gold', level: 'Grade 4', year: '2023/2024', term: 'Term 1', teacher: 'Mr. David Mensah', students: 20 },
-        { id: 6, name: 'Grade 5 Blue', level: 'Grade 5', year: '2023/2024', term: 'Term 1', teacher: 'Mr. Daniel Appiah', students: 21 },
-        { id: 7, name: 'Grade 6 Silver', level: 'Grade 6', year: '2023/2024', term: 'Term 1', teacher: 'Mrs. Linda Nsiah', students: 26 },
-    ];
+    const { classes, students } = useMockData();
+    const classData = classes.map(c => ({
+        id: c.id, name: c.name, level: c.level, year: c.year, term: c.term, teacher: c.teacherName,
+        students: students.filter(s => s.classId === c.id).length
+    }));
 
     const filteredClasses = classData.filter(cls => {
         const matchesSearch = cls.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -94,7 +91,7 @@ export default function AdminClassList({ navigate }: { navigate: (path: string) 
                         <h2 className="text-xl font-bold text-[#1F3864] hidden sm:block">Class Management</h2>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                             <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
                         </button>
@@ -178,7 +175,7 @@ export default function AdminClassList({ navigate }: { navigate: (path: string) 
                                 </thead>
                                 <tbody className="text-sm">
                                     {filteredClasses.map((cls, i) => (
-                                        <tr key={cls.id} className={`border-b border-gray-100 hover:bg-gray-50 transition-colors ${i % 2 !== 0 ? 'bg-[#DCE6F1]/20' : 'bg-white'}`}>
+                                        <tr key={cls.id as string} className={`border-b border-gray-100 hover:bg-gray-50 transition-colors ${i % 2 !== 0 ? 'bg-[#DCE6F1]/20' : 'bg-white'}`}>
                                             <td className="py-4 px-5 font-bold text-gray-500">C{String(cls.id).padStart(3, '0')}</td>
                                             <td className="py-4 px-5 font-bold text-[#1F3864]">
                                                 <div className="hover:underline cursor-pointer">{cls.name}</div>
@@ -208,7 +205,7 @@ export default function AdminClassList({ navigate }: { navigate: (path: string) 
                                                 </span>
                                             </td>
                                             <td className="py-4 px-5 text-right">
-                                                <button className="p-2 text-gray-400 hover:text-[#1F3864] hover:bg-[#DCE6F1] rounded-lg transition-colors">
+                                                <button onClick={() => navigate('empty_state')} className="p-2 text-gray-400 hover:text-[#1F3864] hover:bg-[#DCE6F1] rounded-lg transition-colors">
                                                     <MoreVertical className="w-5 h-5" />
                                                 </button>
                                             </td>

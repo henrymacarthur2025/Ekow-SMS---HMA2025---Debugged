@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMockData } from '../store/MockDataContext';
 import { 
     LayoutDashboard, Users, BookOpen, FileText, Bell, 
     LogOut, Menu, FileX, ChevronDown, Calendar, 
@@ -21,15 +22,12 @@ export default function AttendanceParentView({ navigate }: { navigate: (path: st
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
 
-    const attendanceRecords = [
-        { id: 1, date: 'Oct 15, 2024', day: 'Tuesday', status: 'present', timeIn: '07:45 AM' },
-        { id: 2, date: 'Oct 14, 2024', day: 'Monday', status: 'late', timeIn: '08:15 AM' },
-        { id: 3, date: 'Oct 11, 2024', day: 'Friday', status: 'present', timeIn: '07:30 AM' },
-        { id: 4, date: 'Oct 10, 2024', day: 'Thursday', status: 'absent', timeIn: '-' },
-        { id: 5, date: 'Oct 09, 2024', day: 'Wednesday', status: 'present', timeIn: '07:40 AM' },
-        { id: 6, date: 'Oct 08, 2024', day: 'Tuesday', status: 'present', timeIn: '07:50 AM' },
-        { id: 7, date: 'Oct 07, 2024', day: 'Monday', status: 'present', timeIn: '07:35 AM' },
-    ];
+    const { attendanceRecords: globalAttendanceRecords } = useMockData();
+    const attendanceRecords = globalAttendanceRecords.filter(r => r.studentId === 'STU001').map(r => ({
+        ...r,
+        // formatted dates might be different but let's just use the mock date 
+        // string and map some fields to match the UI.
+    })).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
     const getStatusStyle = (status: string) => {
         switch (status) {
@@ -104,7 +102,7 @@ export default function AttendanceParentView({ navigate }: { navigate: (path: st
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -185,7 +183,7 @@ export default function AttendanceParentView({ navigate }: { navigate: (path: st
                                 </thead>
                                 <tbody className="text-sm">
                                     {attendanceRecords.map((record, i) => (
-                                        <tr key={record.id} className={`border-b border-gray-100 ${i % 2 !== 0 ? 'bg-[#DCE6F1]/40' : 'bg-white'}`}>
+                                        <tr key={record.id as string} className={`border-b border-gray-100 ${i % 2 !== 0 ? 'bg-[#DCE6F1]/40' : 'bg-white'}`}>
                                             <td className="py-4 px-5 font-bold text-[#1F3864]">{record.date}</td>
                                             <td className="py-4 px-5 font-semibold text-gray-600">{record.day}</td>
                                             <td className="py-4 px-5">

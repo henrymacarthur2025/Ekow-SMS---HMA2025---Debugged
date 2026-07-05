@@ -74,7 +74,7 @@ export default function LogoutConfirmation({ navigate }: LogoutConfirmationProps
                 </nav>
 
                 <div className="p-4 border-t border-white/10">
-                    <button 
+                    <button onClick={() => navigate('empty_state')} 
                         className="flex items-center gap-3 px-4 py-3 w-full text-left rounded-lg text-white/80 hover:bg-white/5 hover:text-white transition-colors"
                     >
                         <LogOut className="w-5 h-5" />
@@ -89,7 +89,7 @@ export default function LogoutConfirmation({ navigate }: LogoutConfirmationProps
                 <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between sticky top-0">
                     <h1 className="text-2xl font-bold text-[#1F3864]">Dashboard</h1>
                     <div className="hidden md:flex items-center gap-4">
-                        <button className="p-2 text-gray-400 hover:text-[#1F3864] transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-400 hover:text-[#1F3864] transition-colors relative">
                             <Bell className="w-6 h-6" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>

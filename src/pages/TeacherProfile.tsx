@@ -87,7 +87,7 @@ export default function TeacherProfile({ navigate }: { navigate: (path: string) 
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -148,7 +148,7 @@ export default function TeacherProfile({ navigate }: { navigate: (path: string) 
                                 </div>
                             </div>
                             
-                            <button className="w-full px-4 py-2 bg-white border border-gray-200 text-[#1F3864] font-bold rounded-lg hover:bg-gray-50 transition-colors shadow-sm">
+                            <button onClick={() => navigate('teacher_profile')} className="w-full px-4 py-2 bg-white border border-gray-200 text-[#1F3864] font-bold rounded-lg hover:bg-gray-50 transition-colors shadow-sm">
                                 Edit Contact Details
                             </button>
                         </div>
@@ -207,7 +207,7 @@ export default function TeacherProfile({ navigate }: { navigate: (path: string) 
                             </div>
                             
                             <div className="flex justify-end pt-2">
-                                <button className="px-6 py-2.5 bg-[#1F3864] text-white font-bold rounded-lg hover:bg-[#162a4d] transition-colors shadow-sm w-full sm:w-auto">
+                                <button onClick={() => navigate('reset_password')} className="px-6 py-2.5 bg-[#1F3864] text-white font-bold rounded-lg hover:bg-[#162a4d] transition-colors shadow-sm w-full sm:w-auto">
                                     Update Password
                                 </button>
                             </div>

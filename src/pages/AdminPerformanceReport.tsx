@@ -101,7 +101,7 @@ export default function AdminPerformanceReport({ navigate }: { navigate: (path: 
                         <h2 className="text-xl font-bold text-[#1F3864] hidden sm:block">Performance Overview Report</h2>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -126,11 +126,11 @@ export default function AdminPerformanceReport({ navigate }: { navigate: (path: 
                                 <p className="text-sm text-gray-500 font-semibold">Compare class-by-class attendance rate versus average grade.</p>
                             </div>
                             <div className="flex items-center gap-3">
-                                <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm font-bold text-gray-700 hover:bg-gray-50 transition-colors">
+                                <button onClick={() => navigate('empty_state')} className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm font-bold text-gray-700 hover:bg-gray-50 transition-colors">
                                     <Download className="w-4 h-4" />
                                     Export CSV
                                 </button>
-                                <button className="flex items-center gap-2 px-4 py-2 bg-[#1F3864] text-white rounded-lg text-sm font-bold hover:bg-[#2a4d8a] transition-colors">
+                                <button onClick={() => navigate('empty_state')} className="flex items-center gap-2 px-4 py-2 bg-[#1F3864] text-white rounded-lg text-sm font-bold hover:bg-[#2a4d8a] transition-colors">
                                     <FileText className="w-4 h-4" />
                                     Generate PDF Report
                                 </button>

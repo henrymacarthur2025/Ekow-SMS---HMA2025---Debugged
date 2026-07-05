@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMockData } from '../store/MockDataContext';
 import { 
     LayoutDashboard, Users, GraduationCap, Building2, CalendarCheck, 
     Bell, LogOut, Menu, MessageSquare, Settings, Contact, Shield,
@@ -28,15 +29,11 @@ export default function AdminHomeworkOversight({ navigate }: { navigate: (path: 
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
 
-    const [homeworkData, setHomeworkData] = useState([
-        { id: 'HW001', title: 'Algebra Equations', class: 'Grade 1 Blue', subject: 'Mathematics', teacher: 'Mrs. Sarah Osei', postedDate: '2023-10-15', dueDate: '2023-10-17', status: 'Active' },
-        { id: 'HW002', title: 'Reading Comprehension', class: 'Grade 1 Blue', subject: 'English', teacher: 'Mrs. Sarah Osei', postedDate: '2023-10-14', dueDate: '2023-10-16', status: 'Active' },
-        { id: 'HW003', title: 'Photosynthesis Essay', class: 'Grade 2 Blue', subject: 'Science', teacher: 'Mr. Daniel Appiah', postedDate: '2023-10-10', dueDate: '2023-10-12', status: 'Completed' },
-        { id: 'HW004', title: 'Ghana History Project', class: 'Grade 3 Silver', subject: 'Soc. Studies', teacher: 'Mrs. Mary Boakye', postedDate: '2023-10-16', dueDate: '2023-10-23', status: 'Active' },
-        { id: 'HW005', title: 'French Vocabulary', class: 'Grade 4 Gold', subject: 'French', teacher: 'Mr. Paul Kumi', postedDate: '2023-10-15', dueDate: '2023-10-16', status: 'Pending' },
-        { id: 'HW006', title: 'Basic Scratch Programming', class: 'Grade 4 Gold', subject: 'ICT', teacher: 'Mr. David Mensah', postedDate: '2023-10-11', dueDate: '2023-10-13', status: 'Completed' },
-        { id: 'HW007', title: 'Geometry Worksheet', class: 'Grade 1 Gold', subject: 'Mathematics', teacher: 'Mr. John Amoah', postedDate: '2023-10-16', dueDate: '2023-10-18', status: 'Active' },
-    ]);
+    const { homeworkRecords } = useMockData();
+    const homeworkData = homeworkRecords.map(hw => ({
+        id: hw.id, title: hw.title, class: hw.classStr, subject: hw.subject, 
+        teacher: 'Mrs. Sarah Osei', postedDate: '2024-10-15', dueDate: hw.dueDate, status: hw.status
+    }));
 
     const filteredHomework = homeworkData.filter(hw => {
         const matchesClass = selectedClass === "All Classes" || hw.class === selectedClass;
@@ -48,7 +45,7 @@ export default function AdminHomeworkOversight({ navigate }: { navigate: (path: 
 
     const removeHomework = (id: string) => {
         if (window.confirm('Are you sure you want to remove this homework assignment?')) {
-            setHomeworkData(homeworkData.filter(hw => hw.id !== id));
+            /* setHomeworkData removed */(homeworkData.filter(hw => hw.id !== id));
         }
     };
 
@@ -105,7 +102,7 @@ export default function AdminHomeworkOversight({ navigate }: { navigate: (path: 
                         <h2 className="text-xl font-bold text-[#1F3864] hidden sm:block">Homework Oversight</h2>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -202,7 +199,7 @@ export default function AdminHomeworkOversight({ navigate }: { navigate: (path: 
                                     </thead>
                                     <tbody className="text-sm">
                                         {filteredHomework.map((hw, i) => (
-                                            <tr key={hw.id} className={`border-b border-gray-100 hover:bg-gray-50 transition-colors ${i % 2 !== 0 ? 'bg-[#DCE6F1]/20' : 'bg-white'}`}>
+                                            <tr key={hw.id as string} className={`border-b border-gray-100 hover:bg-gray-50 transition-colors ${i % 2 !== 0 ? 'bg-[#DCE6F1]/20' : 'bg-white'}`}>
                                                 <td className="py-4 px-5 font-bold text-gray-500">{hw.id}</td>
                                                 <td className="py-4 px-5 font-bold text-[#1F3864]">{hw.title}</td>
                                                 <td className="py-4 px-5">

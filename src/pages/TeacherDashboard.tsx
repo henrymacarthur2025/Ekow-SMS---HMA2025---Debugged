@@ -82,7 +82,7 @@ export default function TeacherDashboard({ navigate }: { navigate: (path: string
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                             <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                         </button>
@@ -157,7 +157,7 @@ export default function TeacherDashboard({ navigate }: { navigate: (path: string
                                             <BookOpen className="w-4 h-4" />
                                             {cls.schedule}
                                         </p>
-                                        <button className="text-sm font-bold text-[#1F3864] hover:underline">
+                                        <button onClick={() => navigate('teacher_classes')} className="text-sm font-bold text-[#1F3864] hover:underline">
                                             Manage Class
                                         </button>
                                     </div>

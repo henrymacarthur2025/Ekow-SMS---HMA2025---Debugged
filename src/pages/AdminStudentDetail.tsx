@@ -14,10 +14,10 @@ export default function AdminStudentDetail({ navigate }: { navigate: (path: stri
         { icon: LayoutDashboard, label: 'Dashboard', path: 'admin_dashboard', active: false },
         { icon: GraduationCap, label: 'Students', path: 'admin_students', active: true },
         { icon: Users, label: 'Teachers', path: 'admin_teachers', active: false },
-        { icon: Building2, label: 'Classes', path: '#', active: false },
-        { icon: CalendarCheck, label: 'Attendance', path: '#', active: false },
-        { icon: MessageSquare, label: 'Announcements', path: '#', active: false },
-        { icon: Settings, label: 'Settings', path: '#', active: false },
+        { icon: Building2, label: 'Classes', path: 'admin_classes', active: false },
+        { icon: CalendarCheck, label: 'Attendance', path: 'admin_attendance_oversight', active: false },
+        { icon: MessageSquare, label: 'Announcements', path: 'admin_announcements', active: false },
+        { icon: Settings, label: 'Settings', path: 'admin_school_profile', active: false },
         { icon: LogOut, label: 'Logout', path: 'login', active: false },
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
@@ -108,7 +108,7 @@ export default function AdminStudentDetail({ navigate }: { navigate: (path: stri
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -193,7 +193,7 @@ export default function AdminStudentDetail({ navigate }: { navigate: (path: stri
                                         {codeCopied ? <CheckCircle className="w-5 h-5 text-green-600" /> : <Copy className="w-5 h-5" />}
                                     </button>
                                 </div>
-                                <button className="w-full mt-4 py-2 text-sm font-bold bg-transparent border border-white/30 rounded-lg hover:bg-white/10 transition-colors">
+                                <button onClick={() => navigate('admin_student_detail')} className="w-full mt-4 py-2 text-sm font-bold bg-transparent border border-white/30 rounded-lg hover:bg-white/10 transition-colors">
                                     Generate New Code
                                 </button>
                             </div>

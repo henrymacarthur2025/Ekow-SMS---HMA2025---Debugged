@@ -81,7 +81,7 @@ export default function TeacherAnnouncementPosting({ navigate }: { navigate: (pa
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -166,7 +166,7 @@ export default function TeacherAnnouncementPosting({ navigate }: { navigate: (pa
                             >
                                 Cancel
                             </button>
-                            <button className="px-6 py-2.5 bg-[#1F3864] text-white font-bold rounded-lg hover:bg-[#162a4d] transition-colors shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto">
+                            <button onClick={() => navigate('empty_state')} className="px-6 py-2.5 bg-[#1F3864] text-white font-bold rounded-lg hover:bg-[#162a4d] transition-colors shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto">
                                 <Send className="w-4 h-4" />
                                 Post Announcement
                             </button>

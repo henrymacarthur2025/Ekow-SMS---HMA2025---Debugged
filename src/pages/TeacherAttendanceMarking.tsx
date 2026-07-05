@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMockData } from '../store/MockDataContext';
 import { 
     LayoutDashboard, Users, BookOpen, FileText, Bell, 
     LogOut, Menu, FileX, BookMarked, MessageSquare, User,
@@ -21,37 +22,54 @@ export default function TeacherAttendanceMarking({ navigate }: { navigate: (path
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
 
-    const initialStudents = [
-        { id: 1, name: 'Abigail Appiah', rollNumber: '001', status: 'present' },
-        { id: 2, name: 'Benjamin Boakye', rollNumber: '002', status: 'present' },
-        { id: 3, name: 'Cynthia Cudjoe', rollNumber: '003', status: 'absent' },
-        { id: 4, name: 'Daniel Dankwa', rollNumber: '004', status: 'present' },
-        { id: 5, name: 'Ebenezer Essien', rollNumber: '005', status: 'late' },
-        { id: 6, name: 'Felicia Frimpong', rollNumber: '006', status: 'present' },
-        { id: 7, name: 'George Gyan', rollNumber: '007', status: 'present' },
-        { id: 8, name: 'Hannah Hammond', rollNumber: '008', status: 'present' },
-    ];
+    const { students, attendanceRecords, updateAttendanceStatus, addAttendanceRecord } = useMockData();
+    const today = new Date().toISOString().split('T')[0];
 
-    const [students, setStudents] = useState(initialStudents);
+    const studentData = students.map(s => {
+        const record = attendanceRecords.find(r => r.studentId === s.id && r.date === today);
+        return { ...s, status: record?.status || 'present', recordId: record?.id };
+    });
 
-    const handleStatusChange = (id: number, newStatus: string) => {
-        setStudents(students.map(s => s.id === id ? { ...s, status: newStatus } : s));
+    const handleStatusChange = (id: string, newStatus: string) => {
+        const record = attendanceRecords.find(r => r.studentId === id && r.date === today);
+        if (record) {
+            updateAttendanceStatus(record.id, newStatus);
+        } else {
+            addAttendanceRecord({
+                studentId: id,
+                date: today,
+                status: newStatus as any,
+                classId: 'c1'
+            });
+        }
     };
 
     const markAllPresent = () => {
-        setStudents(students.map(s => ({ ...s, status: 'present' })));
+        students.forEach(s => {
+            const record = attendanceRecords.find(r => r.studentId === s.id && r.date === today);
+            if (record) {
+                updateAttendanceStatus(record.id, 'present');
+            } else {
+                addAttendanceRecord({
+                    studentId: s.id,
+                    date: today,
+                    status: 'present',
+                    classId: 'c1'
+                });
+            }
+        });
     };
 
-    const filteredStudents = students.filter(student => 
+    const filteredStudents = studentData.filter(student => 
         student.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
         student.rollNumber.includes(searchQuery)
     );
 
     const summary = {
-        total: students.length,
-        present: students.filter(s => s.status === 'present').length,
-        absent: students.filter(s => s.status === 'absent').length,
-        late: students.filter(s => s.status === 'late').length,
+        total: studentData.length,
+        present: studentData.filter(s => s.status === 'present').length,
+        absent: studentData.filter(s => s.status === 'absent').length,
+        late: studentData.filter(s => s.status === 'late').length,
     };
 
     const currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
@@ -116,7 +134,7 @@ export default function TeacherAttendanceMarking({ navigate }: { navigate: (path
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -207,7 +225,7 @@ export default function TeacherAttendanceMarking({ navigate }: { navigate: (path
                                 </thead>
                                 <tbody className="text-sm">
                                     {filteredStudents.map((student, i) => (
-                                        <tr key={student.id} className={`border-b border-gray-100 hover:bg-gray-50 transition-colors ${i % 2 !== 0 ? 'bg-[#DCE6F1]/20' : 'bg-white'}`}>
+                                        <tr key={student.id as string} className={`border-b border-gray-100 hover:bg-gray-50 transition-colors ${i % 2 !== 0 ? 'bg-[#DCE6F1]/20' : 'bg-white'}`}>
                                             <td className="py-3 px-5 font-bold text-gray-500">{student.rollNumber}</td>
                                             <td className="py-3 px-5 font-bold text-[#1F3864]">
                                                 <div className="flex items-center gap-3">
@@ -220,7 +238,7 @@ export default function TeacherAttendanceMarking({ navigate }: { navigate: (path
                                             <td className="py-3 px-5">
                                                 <div className="flex justify-center bg-gray-100 rounded-lg p-1 w-full max-w-[240px] mx-auto">
                                                     <button
-                                                        onClick={() => handleStatusChange(student.id, 'present')}
+                                                        onClick={() => handleStatusChange(student.id as string, 'present')}
                                                         className={`flex-1 flex justify-center items-center py-1.5 rounded-md text-xs font-bold transition-all ${
                                                             student.status === 'present' 
                                                                 ? 'bg-white text-green-700 shadow-sm border border-gray-200' 
@@ -230,7 +248,7 @@ export default function TeacherAttendanceMarking({ navigate }: { navigate: (path
                                                         Present
                                                     </button>
                                                     <button
-                                                        onClick={() => handleStatusChange(student.id, 'late')}
+                                                        onClick={() => handleStatusChange(student.id as string, 'late')}
                                                         className={`flex-1 flex justify-center items-center py-1.5 rounded-md text-xs font-bold transition-all ${
                                                             student.status === 'late' 
                                                                 ? 'bg-white text-amber-600 shadow-sm border border-gray-200' 
@@ -240,7 +258,7 @@ export default function TeacherAttendanceMarking({ navigate }: { navigate: (path
                                                         Late
                                                     </button>
                                                     <button
-                                                        onClick={() => handleStatusChange(student.id, 'absent')}
+                                                        onClick={() => handleStatusChange(student.id as string, 'absent')}
                                                         className={`flex-1 flex justify-center items-center py-1.5 rounded-md text-xs font-bold transition-all ${
                                                             student.status === 'absent' 
                                                                 ? 'bg-white text-red-600 shadow-sm border border-gray-200' 
@@ -265,7 +283,7 @@ export default function TeacherAttendanceMarking({ navigate }: { navigate: (path
 
                     {/* Submit Button */}
                     <div className="flex justify-end pt-4">
-                        <button className="px-6 py-3 bg-[#1F3864] text-white font-bold rounded-lg hover:bg-[#162a4d] transition-colors shadow-sm w-full sm:w-auto">
+                        <button onClick={() => navigate('teacher_attendance_history')} className="px-6 py-3 bg-[#1F3864] text-white font-bold rounded-lg hover:bg-[#162a4d] transition-colors shadow-sm w-full sm:w-auto">
                             Submit Attendance
                         </button>
                     </div>

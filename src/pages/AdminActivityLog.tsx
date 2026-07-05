@@ -133,7 +133,7 @@ export default function AdminActivityLog({ navigate }: AdminActivityLogProps) {
                 <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between sticky top-0 z-20">
                     <h1 className="text-2xl font-bold text-[#1F3864]">Activity / Audit Log</h1>
                     <div className="hidden md:flex items-center gap-4">
-                        <button className="p-2 text-gray-400 hover:text-[#1F3864] transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-400 hover:text-[#1F3864] transition-colors relative">
                             <Bell className="w-6 h-6" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -200,7 +200,7 @@ export default function AdminActivityLog({ navigate }: AdminActivityLogProps) {
                                     </div>
                                 </div>
                                 
-                                <button className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1F3864]">
+                                <button onClick={() => navigate('empty_state')} className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1F3864]">
                                     Export
                                 </button>
                             </div>
@@ -256,9 +256,9 @@ export default function AdminActivityLog({ navigate }: AdminActivityLogProps) {
                                 <div>Showing 1 to 8 of 1,240 entries</div>
                                 <div className="flex gap-1">
                                     <button className="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50 disabled:opacity-50">Prev</button>
-                                    <button className="px-3 py-1 bg-[#1F3864] text-white rounded">1</button>
-                                    <button className="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50">2</button>
-                                    <button className="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50">3</button>
+                                    <button onClick={() => navigate('empty_state')} className="px-3 py-1 bg-[#1F3864] text-white rounded">1</button>
+                                    <button onClick={() => navigate('empty_state')} className="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50">2</button>
+                                    <button onClick={() => navigate('empty_state')} className="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50">3</button>
                                     <span className="px-2 py-1">...</span>
                                     <button className="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50 disabled:opacity-50">Next</button>
                                 </div>

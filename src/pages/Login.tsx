@@ -64,7 +64,7 @@ export default function Login({ navigate }: { navigate: (path: string) => void }
                     <footer className="mt-8 pt-6 border-t border-outline-variant text-center">
                         <p className="text-sm text-on-surface-variant mb-2">
                             Having trouble logging in? <br className="md:hidden" />
-                            <button className="text-primary font-semibold hover:underline ml-1">Contact System Administrator</button>
+                            <button onClick={() => navigate('dashboard')} className="text-primary font-semibold hover:underline ml-1">Contact System Administrator</button>
                         </p>
                         <p className="text-sm text-on-surface-variant">
                             Need an account? 

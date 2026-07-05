@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMockData } from '../store/MockDataContext';
 import { 
     LayoutDashboard, Users, GraduationCap, Building2, CalendarCheck, 
     Bell, LogOut, Menu, MessageSquare, Settings, Contact, Shield,
@@ -28,15 +29,8 @@ export default function AdminAnnouncements({ navigate }: { navigate: (path: stri
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
 
-    const [announcementsData, setAnnouncementsData] = useState([
-        { id: 'ANN001', title: 'PTA Meeting Rescheduled', scope: 'School-Wide', sender: 'Principal Mensah', date: '2023-10-15', hasAttachment: true, pinned: true },
-        { id: 'ANN002', title: 'Mid-Term Break Commences', scope: 'School-Wide', sender: 'Admin Office', date: '2023-10-20', hasAttachment: false, pinned: false },
-        { id: 'ANN003', title: 'Grade 1 Blue Field Trip', scope: 'Grade 1 Blue', sender: 'Mrs. Sarah Osei', date: '2023-10-12', hasAttachment: true, pinned: false },
-        { id: 'ANN004', title: 'Inter-House Sports Competition', scope: 'School-Wide', sender: 'Sports Department', date: '2023-10-05', hasAttachment: false, pinned: false },
-        { id: 'ANN005', title: 'New Coding Curriculum', scope: 'Grade 4 Gold', sender: 'Mr. David Mensah', date: '2023-10-18', hasAttachment: true, pinned: false },
-        { id: 'ANN006', title: 'School Fees Reminder', scope: 'School-Wide', sender: 'Finance Office', date: '2023-10-01', hasAttachment: false, pinned: false },
-        { id: 'ANN007', title: 'Science Fair Requirements', scope: 'Grade 2 Blue', sender: 'Mr. Daniel Appiah', date: '2023-10-16', hasAttachment: true, pinned: false },
-    ]);
+    const { announcements } = useMockData();
+    const announcementsData = announcements;
 
     const filteredAnnouncements = announcementsData.filter(ann => {
         const matchesScope = selectedScope === "All Scopes" || ann.scope === selectedScope || (selectedScope === "School-Wide" && ann.scope === "School-Wide") || (selectedScope === "Class-Specific" && ann.scope !== "School-Wide");
@@ -47,12 +41,12 @@ export default function AdminAnnouncements({ navigate }: { navigate: (path: stri
 
     const removeAnnouncement = (id: string) => {
         if (window.confirm('Are you sure you want to delete this announcement?')) {
-            setAnnouncementsData(announcementsData.filter(ann => ann.id !== id));
+            /* setAnnouncementsData removed */(announcementsData.filter(ann => ann.id !== id));
         }
     };
 
     const togglePin = (id: string) => {
-        setAnnouncementsData(announcementsData.map(ann => 
+        /* setAnnouncementsData removed */(announcementsData.map(ann => 
             ann.id === id ? { ...ann, pinned: !ann.pinned } : ann
         ).sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0)));
     };
@@ -110,7 +104,7 @@ export default function AdminAnnouncements({ navigate }: { navigate: (path: stri
                         <h2 className="text-xl font-bold text-[#1F3864] hidden sm:block">Announcements Management</h2>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>

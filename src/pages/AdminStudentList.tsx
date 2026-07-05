@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMockData } from '../store/MockDataContext';
 import { 
     LayoutDashboard, Users, GraduationCap, Building2, CalendarCheck, 
     Bell, LogOut, Menu, FileX, MessageSquare, Settings,
@@ -14,24 +15,23 @@ export default function AdminStudentList({ navigate }: { navigate: (path: string
         { icon: LayoutDashboard, label: 'Dashboard', path: 'admin_dashboard', active: false },
         { icon: GraduationCap, label: 'Students', path: 'admin_students', active: true },
         { icon: Users, label: 'Teachers', path: 'admin_teachers', active: false },
-        { icon: Building2, label: 'Classes', path: '#', active: false },
-        { icon: CalendarCheck, label: 'Attendance', path: '#', active: false },
-        { icon: MessageSquare, label: 'Announcements', path: '#', active: false },
-        { icon: Settings, label: 'Settings', path: '#', active: false },
+        { icon: Building2, label: 'Classes', path: 'admin_classes', active: false },
+        { icon: CalendarCheck, label: 'Attendance', path: 'admin_attendance_oversight', active: false },
+        { icon: MessageSquare, label: 'Announcements', path: 'admin_announcements', active: false },
+        { icon: Settings, label: 'Settings', path: 'admin_school_profile', active: false },
         { icon: LogOut, label: 'Logout', path: 'login', active: false },
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
 
-    const studentData = [
-        { id: 1, name: 'Abigail Appiah', rollNumber: '001', className: 'Grade 4 Gold', guardian: 'Mr. & Mrs. Appiah', status: 'Active' },
-        { id: 2, name: 'Benjamin Boakye', rollNumber: '002', className: 'Grade 4 Gold', guardian: 'Mr. Samuel Boakye', status: 'Active' },
-        { id: 3, name: 'Cynthia Cudjoe', rollNumber: '003', className: 'Grade 5 Silver', guardian: 'Mrs. Grace Cudjoe', status: 'Active' },
-        { id: 4, name: 'Daniel Dankwa', rollNumber: '004', className: 'Grade 5 Silver', guardian: 'Mr. Kwame Dankwa', status: 'Inactive' },
-        { id: 5, name: 'Ebenezer Essien', rollNumber: '005', className: 'Grade 6 Bronze', guardian: 'Madam Mary Essien', status: 'Active' },
-        { id: 6, name: 'Felicia Frimpong', rollNumber: '006', className: 'Grade 4 Gold', guardian: 'Mr. & Mrs. Frimpong', status: 'Active' },
-        { id: 7, name: 'George Gyan', rollNumber: '007', className: 'Grade 6 Bronze', guardian: 'Dr. Albert Gyan', status: 'Active' },
-        { id: 8, name: 'Hannah Hammond', rollNumber: '008', className: 'Grade 5 Silver', guardian: 'Mrs. Sarah Hammond', status: 'Active' },
-    ];
+    const { students } = useMockData();
+    const studentData = students.map(s => ({
+        id: s.id,
+        name: s.name,
+        rollNumber: s.rollNumber,
+        className: s.className || 'Grade 4 Gold',
+        guardian: s.guardianName,
+        status: 'Active'
+    }));
 
     const filteredStudents = studentData.filter(student => {
         const matchesSearch = student.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -96,7 +96,7 @@ export default function AdminStudentList({ navigate }: { navigate: (path: string
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -177,7 +177,7 @@ export default function AdminStudentList({ navigate }: { navigate: (path: string
                                 </thead>
                                 <tbody className="text-sm">
                                     {filteredStudents.map((student, i) => (
-                                        <tr key={student.id} className={`border-b border-gray-100 hover:bg-gray-50 transition-colors ${i % 2 !== 0 ? 'bg-[#DCE6F1]/20' : 'bg-white'}`}>
+                                        <tr key={student.id as string} className={`border-b border-gray-100 hover:bg-gray-50 transition-colors ${i % 2 !== 0 ? 'bg-[#DCE6F1]/20' : 'bg-white'}`}>
                                             <td className="py-4 px-5 font-bold text-gray-500">{student.rollNumber}</td>
                                             <td className="py-4 px-5 font-bold text-[#1F3864]">
                                                 <div 
@@ -207,7 +207,7 @@ export default function AdminStudentList({ navigate }: { navigate: (path: string
                                                 </span>
                                             </td>
                                             <td className="py-4 px-5 text-right">
-                                                <button className="p-2 text-gray-400 hover:text-[#1F3864] hover:bg-[#DCE6F1] rounded-lg transition-colors">
+                                                <button onClick={() => navigate('empty_state')} className="p-2 text-gray-400 hover:text-[#1F3864] hover:bg-[#DCE6F1] rounded-lg transition-colors">
                                                     <MoreVertical className="w-5 h-5" />
                                                 </button>
                                             </td>

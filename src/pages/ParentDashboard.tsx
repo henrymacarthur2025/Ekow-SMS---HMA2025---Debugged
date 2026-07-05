@@ -93,7 +93,7 @@ export default function ParentDashboard({ navigate }: { navigate: (path: string)
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                             <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                         </button>
@@ -148,7 +148,7 @@ export default function ParentDashboard({ navigate }: { navigate: (path: string)
                                 <span className="text-sm font-semibold text-gray-500">Checked in at 07:45 AM</span>
                             </div>
                             
-                            <button className="mt-4 w-full py-2.5 border-2 border-[#1F3864]/20 text-[#1F3864] font-bold rounded-lg hover:bg-white transition-colors">
+                            <button onClick={() => navigate('attendance_parent')} className="mt-4 w-full py-2.5 border-2 border-[#1F3864]/20 text-[#1F3864] font-bold rounded-lg hover:bg-white transition-colors">
                                 View History
                             </button>
                         </div>
@@ -160,7 +160,7 @@ export default function ParentDashboard({ navigate }: { navigate: (path: string)
                                     <Bell className="w-5 h-5" />
                                     <h3 className="text-lg font-bold">Latest Announcements</h3>
                                 </div>
-                                <button className="text-sm font-bold text-[#1F3864] hover:underline">View All</button>
+                                <button onClick={() => navigate('announcements_parent')} className="text-sm font-bold text-[#1F3864] hover:underline">View All</button>
                             </div>
                             
                             <div className="flex-1 space-y-3">
@@ -190,7 +190,7 @@ export default function ParentDashboard({ navigate }: { navigate: (path: string)
                                     <BookMarked className="w-5 h-5" />
                                     <h3 className="text-lg font-bold">Upcoming Homework</h3>
                                 </div>
-                                <button className="text-sm font-bold text-[#1F3864] hover:underline">All Assignments</button>
+                                <button onClick={() => navigate('homework_parent')} className="text-sm font-bold text-[#1F3864] hover:underline">All Assignments</button>
                             </div>
                             
                             <div className="overflow-x-auto">

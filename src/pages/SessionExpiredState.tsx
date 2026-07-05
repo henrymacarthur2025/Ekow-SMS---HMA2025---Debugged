@@ -98,7 +98,7 @@ export default function SessionExpiredState({ navigate }: SessionExpiredStatePro
                 <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between sticky top-0 z-20">
                     <h1 className="text-2xl font-bold text-[#1F3864]">Session Expired</h1>
                     <div className="hidden md:flex items-center gap-4">
-                        <button className="p-2 text-gray-400 hover:text-[#1F3864] transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-400 hover:text-[#1F3864] transition-colors relative">
                             <Bell className="w-6 h-6" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>

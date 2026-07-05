@@ -97,7 +97,7 @@ export default function AdminAnnouncementForm({ navigate }: { navigate: (path: s
                         <h2 className="text-xl font-bold text-[#1F3864] hidden sm:block">Announcements Management</h2>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>

@@ -17,9 +17,9 @@ export default function AdminSubjectList({ navigate }: { navigate: (path: string
         { icon: Contact, label: 'Guardians', path: 'admin_parents', active: false },
         { icon: Building2, label: 'Classes', path: 'admin_classes', active: false },
         { icon: BookOpen, label: 'Subjects', path: 'admin_subjects', active: true },
-        { icon: CalendarCheck, label: 'Attendance', path: '#', active: false },
-        { icon: MessageSquare, label: 'Announcements', path: '#', active: false },
-        { icon: Settings, label: 'Settings', path: '#', active: false },
+        { icon: CalendarCheck, label: 'Attendance', path: 'admin_attendance_oversight', active: false },
+        { icon: MessageSquare, label: 'Announcements', path: 'admin_announcements', active: false },
+        { icon: Settings, label: 'Settings', path: 'admin_school_profile', active: false },
         { icon: LogOut, label: 'Logout', path: 'login', active: false },
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
@@ -93,7 +93,7 @@ export default function AdminSubjectList({ navigate }: { navigate: (path: string
                         <h2 className="text-xl font-bold text-[#1F3864] hidden sm:block">Subject Management</h2>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                             <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
                         </button>
@@ -183,7 +183,7 @@ export default function AdminSubjectList({ navigate }: { navigate: (path: string
                                                 </div>
                                             </td>
                                             <td className="py-4 px-5 text-right">
-                                                <button className="p-2 text-gray-400 hover:text-[#1F3864] hover:bg-[#DCE6F1] rounded-lg transition-colors">
+                                                <button onClick={() => navigate('empty_state')} className="p-2 text-gray-400 hover:text-[#1F3864] hover:bg-[#DCE6F1] rounded-lg transition-colors">
                                                     <MoreVertical className="w-5 h-5" />
                                                 </button>
                                             </td>

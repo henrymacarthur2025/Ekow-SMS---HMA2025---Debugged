@@ -14,10 +14,10 @@ export default function AdminParentDetail({ navigate }: { navigate: (path: strin
         { icon: Users, label: 'Teachers', path: 'admin_teachers', active: false },
         { icon: Shield, label: 'Administrators', path: 'admin_accounts', active: false },
         { icon: Contact, label: 'Guardians', path: 'admin_parents', active: true },
-        { icon: Building2, label: 'Classes', path: '#', active: false },
-        { icon: CalendarCheck, label: 'Attendance', path: '#', active: false },
-        { icon: MessageSquare, label: 'Announcements', path: '#', active: false },
-        { icon: Settings, label: 'Settings', path: '#', active: false },
+        { icon: Building2, label: 'Classes', path: 'admin_classes', active: false },
+        { icon: CalendarCheck, label: 'Attendance', path: 'admin_attendance_oversight', active: false },
+        { icon: MessageSquare, label: 'Announcements', path: 'admin_announcements', active: false },
+        { icon: Settings, label: 'Settings', path: 'admin_school_profile', active: false },
         { icon: LogOut, label: 'Logout', path: 'login', active: false },
         { icon: Menu, label: 'Sitemap', path: 'sitemap', active: false }
     ];
@@ -99,7 +99,7 @@ export default function AdminParentDetail({ navigate }: { navigate: (path: strin
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
+                        <button onClick={() => navigate('notifications_inbox')} className="p-2 text-gray-500 hover:bg-[#DCE6F1] rounded-full transition-colors relative">
                             <Bell className="w-5 h-5" />
                         </button>
                         <div className="h-8 w-px bg-gray-200"></div>
@@ -179,7 +179,7 @@ export default function AdminParentDetail({ navigate }: { navigate: (path: strin
                                         <LinkIcon className="w-5 h-5 text-gray-400" />
                                         Linked Children
                                     </h4>
-                                    <button className="text-sm font-bold bg-[#DCE6F1] text-[#1F3864] px-3 py-1.5 rounded-md flex items-center gap-1.5 hover:bg-blue-100 transition-colors">
+                                    <button onClick={() => navigate('empty_state')} className="text-sm font-bold bg-[#DCE6F1] text-[#1F3864] px-3 py-1.5 rounded-md flex items-center gap-1.5 hover:bg-blue-100 transition-colors">
                                         <Plus className="w-4 h-4" /> Link Child
                                     </button>
                                 </div>
@@ -207,7 +207,7 @@ export default function AdminParentDetail({ navigate }: { navigate: (path: strin
                                                     <td className="py-4 px-6 font-semibold text-gray-600">{child.class}</td>
                                                     <td className="py-4 px-6 font-semibold text-gray-600">{child.relation}</td>
                                                     <td className="py-4 px-6 text-right">
-                                                        <button className="text-xs font-bold text-red-600 border border-red-200 bg-red-50 px-2 py-1.5 rounded flex items-center gap-1 hover:bg-red-100 transition-colors ml-auto">
+                                                        <button onClick={() => navigate('empty_state')} className="text-xs font-bold text-red-600 border border-red-200 bg-red-50 px-2 py-1.5 rounded flex items-center gap-1 hover:bg-red-100 transition-colors ml-auto">
                                                             <Unlink className="w-3.5 h-3.5" /> Unlink
                                                         </button>
                                                     </td>
@@ -225,7 +225,7 @@ export default function AdminParentDetail({ navigate }: { navigate: (path: strin
                                         <Key className="w-5 h-5 text-gray-400" />
                                         Pending Linkage Codes
                                     </h4>
-                                    <button className="text-sm font-bold bg-[#1F3864] text-white px-3 py-1.5 rounded-md flex items-center gap-1.5 hover:bg-[#2a4d8a] transition-colors">
+                                    <button onClick={() => navigate('empty_state')} className="text-sm font-bold bg-[#1F3864] text-white px-3 py-1.5 rounded-md flex items-center gap-1.5 hover:bg-[#2a4d8a] transition-colors">
                                         <Plus className="w-4 h-4" /> Generate New Code
                                     </button>
                                 </div>
@@ -255,7 +255,7 @@ export default function AdminParentDetail({ navigate }: { navigate: (path: strin
                                                         </span>
                                                     </td>
                                                     <td className="py-4 px-6 text-right space-x-2">
-                                                        <button className="text-xs font-bold text-green-700 bg-green-50 border border-green-200 px-2 py-1.5 rounded hover:bg-green-100 transition-colors">
+                                                        <button onClick={() => navigate('empty_state')} className="text-xs font-bold text-green-700 bg-green-50 border border-green-200 px-2 py-1.5 rounded hover:bg-green-100 transition-colors">
                                                             Confirm
                                                         </button>
                                                     </td>
