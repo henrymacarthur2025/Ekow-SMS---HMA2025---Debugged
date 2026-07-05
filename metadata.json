@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Ekow SMS - HMA2025 - Debugged",
+  "description": "School Management System",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
